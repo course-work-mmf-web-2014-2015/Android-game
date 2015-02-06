@@ -14,8 +14,5 @@ public class OurGame extends Game {
 
 	}
 
-	@Override
-	public void render () {
 
-	}
 }
