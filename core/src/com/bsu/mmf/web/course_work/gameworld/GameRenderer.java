@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.bsu.mmf.web.course_work.MainConst;
 import com.bsu.mmf.web.course_work.gameobjects.Squirrel;
 
 /**
@@ -19,10 +20,10 @@ public class GameRenderer {
 
     private Squirrel squirrel;
 
-    public GameRenderer(GameWorld world,  int gameHeight, int midPointX) {
+    public GameRenderer(GameWorld world,  int gameHeight, int midPointX ) {
         myWorld = world;
         cam = new OrthographicCamera();
-        cam.setToOrtho(true, 136, 204);       // вынести в константы
+        cam.setToOrtho(true, MainConst.GEMEWIDTH , MainConst.GEMEHEIGHT);
         shapeRenderer = new ShapeRenderer();
         shapeRenderer.setProjectionMatrix(cam.combined);
 

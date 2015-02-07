@@ -3,6 +3,7 @@ package com.bsu.mmf.web.course_work.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.bsu.mmf.web.course_work.MainConst;
 import com.bsu.mmf.web.course_work.gameworld.GameRenderer;
 import com.bsu.mmf.web.course_work.gameworld.GameWorld;
 
@@ -23,12 +24,14 @@ public class GameScreen implements Screen {
 
         float screenWidth = Gdx.graphics.getWidth();
         float screenHeight = Gdx.graphics.getHeight();
-        float gameWidth = 136;                                         // вынести в константы
+        float gameWidth = MainConst.GEMEWIDTH;
         float gameHeight = screenHeight / (screenWidth / gameWidth);
+        MainConst.GEMEHEIGHT = gameHeight;
+
 
         int midPointX = (int) (gameWidth / 2);
 
-        world = new GameWorld(midPointX);
+        world = new GameWorld();
         renderer = new GameRenderer(world , (int)gameHeight ,midPointX );
 
     }

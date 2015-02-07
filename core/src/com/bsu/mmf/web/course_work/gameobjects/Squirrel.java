@@ -2,6 +2,7 @@ package com.bsu.mmf.web.course_work.gameobjects;
 
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
+import com.bsu.mmf.web.course_work.MainConst;
 
 /**
  * Created by Anton on 06.02.2015.
@@ -13,10 +14,11 @@ public class Squirrel {
 
     private Circle boundingCircle; //описанная окружность...для проверки пересечения
 
-    private int width;           //ширина
-    private int height;          //высота белки
+    private float width;           //ширина
+    private float height;          //высота белки
+    private float circleRadius = MainConst.CIRCLERADIUSSQUIRREL;
 
-    public Squirrel(float x, float y, int width, int height) {
+    public Squirrel(float x, float y, float width, float height) {
         this.width = width;
         this.height = height;
         position = new Vector2(x, y);
@@ -29,19 +31,19 @@ public class Squirrel {
     public void update(float delta) {
 
         position.add(velocity.cpy().scl(delta));
-        boundingCircle.set(position.x + 6, position.y + 6, 6.5f);
-        velocity.x = 0;
+        boundingCircle.set(position.x + 6, position.y + 6, circleRadius);     // круг для просмотра пересечения...отрисовывается за объектом
+        velocity.x = 0;  // по другому нужно...это потом переделается
 
     }
 
     public void swypeLeft() {
        //реализация свайпа
-        velocity.x = -140;          // вынести в константы
+        velocity.x = - MainConst.SWYPE;
     }
 
     public void swypeRight() {
         //реализация свайпа
-        velocity.x = 140;           // вынести в константы
+        velocity.x = MainConst.SWYPE;
     }
 
     public float getX() {
