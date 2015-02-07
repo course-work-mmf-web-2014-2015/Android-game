@@ -14,6 +14,7 @@ public class GameWorld {
     public GameWorld() {
         squirrel = new Squirrel(MainConst.POSITIONXSQUIRREL, MainConst.POSITIONYSQUIRREL,
                 MainConst.WIDTHSQUIRREL ,  MainConst.HEIGHTSQUIRREL );
+
     }
 
     public void update(float delta) {

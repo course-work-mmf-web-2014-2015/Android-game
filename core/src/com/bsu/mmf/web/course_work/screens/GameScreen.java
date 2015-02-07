@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.bsu.mmf.web.course_work.MainConst;
 import com.bsu.mmf.web.course_work.gameworld.GameRenderer;
 import com.bsu.mmf.web.course_work.gameworld.GameWorld;
+import com.bsu.mmf.web.course_work.helpers.InputHandler;
 
 /**
  * Created by Anton on 06.02.2015.
@@ -33,6 +34,8 @@ public class GameScreen implements Screen {
 
         world = new GameWorld();
         renderer = new GameRenderer(world , (int)gameHeight ,midPointX );
+
+        Gdx.input.setInputProcessor(new InputHandler(world.getSquirrel()));
 
     }
 

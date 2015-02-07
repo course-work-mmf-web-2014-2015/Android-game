@@ -17,6 +17,11 @@ public class Squirrel {
     private float width;           //ширина
     private float height;          //высота белки
     private float circleRadius = MainConst.CIRCLERADIUSSQUIRREL;
+    private float tempX ;
+    private float tempSwype = MainConst.SWYPE ;
+
+    public int xtouchDown = 0 ;
+    public int xtouchUp = 0 ;
 
     public Squirrel(float x, float y, float width, float height) {
         this.width = width;
@@ -32,19 +37,25 @@ public class Squirrel {
 
         position.add(velocity.cpy().scl(delta));
         boundingCircle.set(position.x + 6, position.y + 6, circleRadius);     // круг для просмотра пересечения...отрисовывается за объектом
-        velocity.x = 0;  // по другому нужно...это потом переделается
+       // velocity.x = 0;  // по другому нужно...это потом переделается
+
+        if (velocity.x != 0)
+            if ( Math.abs(position.x - tempX)  > 50 )                           // отрегулировать и вынести в константу
+                velocity.x = 0;
 
     }
 
-    public void swypeLeft() {
-       //реализация свайпа
-        velocity.x = - MainConst.SWYPE;
+    public void swype() {                     //реализация свайпа
+        tempX = position.x ;                 // и проверить на выход из границ
+
+        if (xtouchDown!= 0 && xtouchUp!= 0)
+            if (xtouchUp > xtouchDown)
+                velocity.x = tempSwype;
+            else  velocity.x = - tempSwype;
+
     }
 
-    public void swypeRight() {
-        //реализация свайпа
-        velocity.x = MainConst.SWYPE;
-    }
+
 
     public float getX() {
         return position.x;
