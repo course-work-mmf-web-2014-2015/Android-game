@@ -51,7 +51,8 @@ public class Squirrel {
         if (xtouchDown!= 0 && xtouchUp!= 0)
             if (xtouchUp > xtouchDown)
                 velocity.x = tempSwype;
-            else  velocity.x = - tempSwype;
+            else if (xtouchUp < xtouchDown)
+                velocity.x = - tempSwype;
 
     }
 

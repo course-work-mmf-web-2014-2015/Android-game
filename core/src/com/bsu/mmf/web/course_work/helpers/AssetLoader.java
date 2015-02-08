@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.bsu.mmf.web.course_work.MainConst;
 
 /**
  * Created by Anton on 07.02.2015.
@@ -35,7 +36,7 @@ public class AssetLoader {
 
 
         TextureRegion[] squirrels = { squirrel1, squirrel2, squirrel3 };
-        squirrelAnimation = new Animation(0.3f, squirrels);
+        squirrelAnimation = new Animation(MainConst.ANIMATIONSQUIRREL, squirrels);
         squirrelAnimation.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
 
 

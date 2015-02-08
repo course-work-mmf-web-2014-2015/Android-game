@@ -31,10 +31,8 @@ public class GameScreen implements Screen {
         MainConst.GEMEHEIGHT = gameHeight;
 
 
-        int midPointX = (int) (gameWidth / 2);
-
         world = new GameWorld();
-        renderer = new GameRenderer(world , (int)gameHeight ,midPointX );
+        renderer = new GameRenderer(world);
 
         Gdx.input.setInputProcessor(new InputHandler(world.getSquirrel()));
 
