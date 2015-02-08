@@ -40,7 +40,7 @@ public class Squirrel {
        // velocity.x = 0;  // по другому нужно...это потом переделается
 
         if (velocity.x != 0)
-            if ( Math.abs(position.x - tempX)  > 50 )                           // отрегулировать и вынести в константу
+            if ( Math.abs(position.x - tempX)  > 100 )                           // отрегулировать и вынести в константу
                 velocity.x = 0;
 
     }
