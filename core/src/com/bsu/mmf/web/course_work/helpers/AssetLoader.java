@@ -15,7 +15,9 @@ public class AssetLoader {
     public static TextureRegion bg;
 
     public static Animation squirrelAnimation;
+    public static Animation iceAnimation;
     public static TextureRegion squirrel1, squirrel2, squirrel3;
+    public static TextureRegion ice1, ice2;
 
     public static void load() {
 
@@ -34,10 +36,20 @@ public class AssetLoader {
         squirrel3 = new TextureRegion(texture, 800, 0, 100, 100);
         squirrel3.flip(false, true);
 
+        ice1 = new TextureRegion(texture, 600, 100, 200, 162);
+        squirrel3.flip(false, true);
+
+        ice2 = new TextureRegion(texture, 600, 300, 200, 146);
+        squirrel3.flip(false, true);
+
 
         TextureRegion[] squirrels = { squirrel1, squirrel2, squirrel3 };
         squirrelAnimation = new Animation(MainConst.ANIMATIONSQUIRREL, squirrels);
         squirrelAnimation.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
+
+        TextureRegion[] ice = { ice1, ice2 };
+        iceAnimation = new Animation(MainConst.ANIMATIONSQUIRREL, ice);
+        iceAnimation.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
 
 
 

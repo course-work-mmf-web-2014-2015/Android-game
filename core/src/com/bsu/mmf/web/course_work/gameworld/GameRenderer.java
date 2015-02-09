@@ -31,6 +31,7 @@ public class GameRenderer {
 
     private TextureRegion bg;
     private Animation squirrelAnimation;
+    private Animation iceAnimation;
     private TextureRegion squirrel1, squirrel2, squirrel3;
 
     public GameRenderer(GameWorld world) {
@@ -59,6 +60,7 @@ public class GameRenderer {
     private void initAssets() {
         bg = AssetLoader.bg;
         squirrelAnimation = AssetLoader.squirrelAnimation;
+        iceAnimation = AssetLoader.iceAnimation;
        // squirrel1 = AssetLoader.squirrel1;   // пока что не нужно
        // squirrel2 = AssetLoader.squirrel2;
        // squirrel3 = AssetLoader.squirrel3;
@@ -76,6 +78,9 @@ public class GameRenderer {
         batcher.enableBlending();
         // Отрисуем на координатах. Получим Animation объект из AssetLoader
         // Передадим runTime переменную чтобы получить текущий кадр.
+        batcher.draw(iceAnimation.getKeyFrame(runTime),
+                squirrel.getX() - 50, squirrel.getY() - 50, 200, 160);
+
         batcher.draw(squirrelAnimation.getKeyFrame(runTime),
                 squirrel.getX(), squirrel.getY(), squirrel.getWidth(), squirrel.getHeight());
 
