@@ -79,7 +79,7 @@ public class GameRenderer {
         // Отрисуем на координатах. Получим Animation объект из AssetLoader
         // Передадим runTime переменную чтобы получить текущий кадр.
         batcher.draw(iceAnimation.getKeyFrame(runTime),
-                squirrel.getX() - 50, squirrel.getY() - 50, 200, 160);
+                squirrel.getX() - 50, squirrel.getY() - 50, 200, 160);       // заменить
 
         batcher.draw(squirrelAnimation.getKeyFrame(runTime),
                 squirrel.getX(), squirrel.getY(), squirrel.getWidth(), squirrel.getHeight());

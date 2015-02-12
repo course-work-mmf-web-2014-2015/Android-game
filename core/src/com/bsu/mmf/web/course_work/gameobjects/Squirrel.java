@@ -17,11 +17,14 @@ public class Squirrel {
     private float width;           //ширина
     private float height;          //высота белки
     private float circleRadius = MainConst.CIRCLERADIUSSQUIRREL;
-    private float tempX ;
+    private int tempX ;
     private float tempSwype = MainConst.SWYPE ;
 
     public int xtouchDown = 0 ;
     public int xtouchUp = 0 ;
+
+    private int positionInBg;
+    private float positionInBgMassX[]  ;
 
     public Squirrel(float x, float y, float width, float height) {
         this.width = width;
@@ -30,6 +33,16 @@ public class Squirrel {
         velocity = new Vector2(0, 0);
 
         boundingCircle = new Circle();
+
+        positionInBg = 3;
+        tempX = positionInBg;
+
+        positionInBgMassX = new float[6];
+        positionInBgMassX[3] = MainConst.POSITIONXSQUIRREL ;
+        positionInBgMassX[2] = positionInBgMassX[3] - 100 ;
+        positionInBgMassX[1] = positionInBgMassX[2] - 100 ;
+        positionInBgMassX[4] = positionInBgMassX[3] + 100 ;
+        positionInBgMassX[5] = positionInBgMassX[4] + 100 ;
     }
 
 
@@ -37,22 +50,45 @@ public class Squirrel {
 
         position.add(velocity.cpy().scl(delta));
         boundingCircle.set(position.x + 6, position.y + 6, circleRadius);     // круг для просмотра пересечения...отрисовывается за объектом
-       // velocity.x = 0;  // по другому нужно...это потом переделается
 
-        if (velocity.x != 0)
-            if ( Math.abs(position.x - tempX)  > 100 )                           // отрегулировать и вынести в константу
-                velocity.x = 0;
+        if (velocity.x != 0){
+            float tempPosition = positionInBgMassX[positionInBg] ;
+
+            if (  positionInBg > tempX )                        // проверка на выход за границы и
+                if (position.x >= tempPosition ) {
+                    velocity.x = 0;
+                    position.x = tempPosition;
+                }
+
+            if (  positionInBg < tempX )
+                if (position.x <= tempPosition ) {
+                    velocity.x = 0;
+                    position.x = tempPosition;
+                }
+
+
+        }
+
 
     }
 
     public void swype() {                     //реализация свайпа
-        tempX = position.x ;                 // и проверить на выход из границ
+
 
         if (xtouchDown!= 0 && xtouchUp!= 0)
-            if (xtouchUp > xtouchDown)
-                velocity.x = tempSwype;
+            if (xtouchUp > xtouchDown){
+                if (positionInBg != 5){
+                    velocity.x = tempSwype;
+                    tempX = positionInBg;
+                    positionInBg++;
+                }
+            }
             else if (xtouchUp < xtouchDown)
-                velocity.x = - tempSwype;
+                if (positionInBg != 1){
+                    velocity.x = -tempSwype;
+                    tempX = positionInBg;
+                    positionInBg--;
+                }
 
     }
 

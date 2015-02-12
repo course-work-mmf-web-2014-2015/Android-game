@@ -12,7 +12,7 @@ public class MainConst {
 
     public static final float HEIGHTBACKGROUND = 1280;
 
-    public static final float POSITIONXSQUIRREL = GEMEWIDTH/2 - 25;
+    public static final float POSITIONXSQUIRREL = GEMEWIDTH/2 - WIDTHSQUIRREL/2;
     public static final float POSITIONYSQUIRREL = 100;
     public static final float CIRCLERADIUSSQUIRREL = 50;
     public static final float ANIMATIONSQUIRREL = 0.3f;
