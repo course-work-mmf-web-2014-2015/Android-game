@@ -19,6 +19,11 @@ public class AssetLoader {
     public static TextureRegion squirrel1, squirrel2, squirrel3;
     public static TextureRegion ice1, ice2;
 
+
+    public static Texture textureForMenu;
+    public static TextureRegion bgMenu;
+    public static TextureRegion button1, button2;
+
     public static void load() {
 
         texture = new Texture(Gdx.files.internal("img/ice-wallpaper2.png"));
@@ -37,10 +42,7 @@ public class AssetLoader {
         squirrel3.flip(false, true);
 
         ice1 = new TextureRegion(texture, 600, 100, 200, 162);
-        squirrel3.flip(false, true);
-
         ice2 = new TextureRegion(texture, 600, 300, 200, 146);
-        squirrel3.flip(false, true);
 
 
         TextureRegion[] squirrels = { squirrel1, squirrel2, squirrel3 };
@@ -53,11 +55,27 @@ public class AssetLoader {
 
 
 
+
+
+        //for menu
+
+        textureForMenu = new Texture(Gdx.files.internal("img/menu2.png"));
+        textureForMenu.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
+
+        bgMenu = new TextureRegion(textureForMenu, 0, 0, 540, 1200);
+        bgMenu.flip(false, true);
+
+        button1 = new TextureRegion(textureForMenu, 600, 0, 138, 136);
+        button1.flip(false, true);
+
+        button2 = new TextureRegion(textureForMenu, 800, 0, 138, 136);
+        button2.flip(false, true);
     }
 
     public static void dispose() {
         // Мы должны избавляться от текстур, когда заканчивает работать с объектом в котором есть текстуры
         texture.dispose();
+        textureForMenu.dispose();
     }
 
 }

@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.bsu.mmf.web.course_work.MainConst;
+import com.bsu.mmf.web.course_work.OurGame;
 import com.bsu.mmf.web.course_work.gameworld.GameRenderer;
 import com.bsu.mmf.web.course_work.gameworld.GameWorld;
 import com.bsu.mmf.web.course_work.helpers.InputHandler;
@@ -18,30 +19,27 @@ import com.bsu.mmf.web.course_work.helpers.InputHandler;
  */
 public class GameScreen implements Screen {
 
+    private OurGame game;
+
     private GameWorld world;
     private GameRenderer renderer;
     private float runTime = 0;
 
-    public GameScreen() {
+    public GameScreen(OurGame game) {
 
-        float screenWidth = Gdx.graphics.getWidth();
-        float screenHeight = Gdx.graphics.getHeight();
-        float gameWidth = MainConst.GEMEWIDTH;
-        float gameHeight = screenHeight / (screenWidth / gameWidth);
-        MainConst.GEMEHEIGHT = gameHeight;
-
+        this.game = game;
 
         world = new GameWorld();
         renderer = new GameRenderer(world);
 
-        Gdx.input.setInputProcessor(new InputHandler(world.getSquirrel()));
+
 
     }
 
 
     @Override
     public void show() {
-
+        Gdx.input.setInputProcessor(new InputHandler(world.getSquirrel()));
     }
 
     @Override
@@ -68,11 +66,11 @@ public class GameScreen implements Screen {
 
     @Override
     public void hide() {
-
+        Gdx.input.setInputProcessor(null);
     }
 
     @Override
     public void dispose() {
-
+        Gdx.input.setInputProcessor(null);
     }
 }
