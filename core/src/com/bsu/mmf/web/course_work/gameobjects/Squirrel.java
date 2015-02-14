@@ -20,11 +20,13 @@ public class Squirrel {
     private int tempX ;
     private float tempSwype = MainConst.SWYPE ;
 
+    private boolean isAlive;
+
     public int xtouchDown = 0 ;
     public int xtouchUp = 0 ;
 
-    private int positionInBg;
-    private float positionInBgMassX[]  ;
+    private int positionInBg;             // позиция 1 из 5...5 путей
+    private float positionInBgMassX[]  ;  // массив каждому пути - свои координаты точки
 
     public Squirrel(float x, float y, float width, float height) {
         this.width = width;
@@ -36,6 +38,7 @@ public class Squirrel {
 
         positionInBg = 3;
         tempX = positionInBg;
+        isAlive = true;
 
         positionInBgMassX = new float[6];
         positionInBgMassX[3] = MainConst.POSITIONXSQUIRREL ;
@@ -48,8 +51,9 @@ public class Squirrel {
 
     public void update(float delta) {
 
+
         position.add(velocity.cpy().scl(delta));
-        boundingCircle.set(position.x + 6, position.y + 6, circleRadius);     // круг для просмотра пересечения...отрисовывается за объектом
+        boundingCircle.set(position.x + circleRadius+4, position.y + circleRadius+4 , circleRadius);     // круг для просмотра пересечения...отрисовывается за объектом
 
         if (velocity.x != 0){
             float tempPosition = positionInBgMassX[positionInBg] ;
@@ -74,8 +78,8 @@ public class Squirrel {
 
     public void swype() {                     //реализация свайпа
 
-
-        if (xtouchDown!= 0 && xtouchUp!= 0)
+        if (isAlive) {
+            if (xtouchDown!= 0 && xtouchUp!= 0)
             if (xtouchUp > xtouchDown){
                 if (positionInBg != 5){
                     velocity.x = tempSwype;
@@ -89,9 +93,17 @@ public class Squirrel {
                     tempX = positionInBg;
                     positionInBg--;
                 }
-
+        }
     }
 
+    public boolean isAlive() {
+        return isAlive;
+    }
+
+    public void die() {
+        isAlive = false;
+        velocity.x = 0;
+    }
 
 
     public float getX() {

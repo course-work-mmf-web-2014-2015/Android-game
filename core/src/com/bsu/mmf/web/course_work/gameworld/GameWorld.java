@@ -12,6 +12,7 @@ public class GameWorld {
 
     private Squirrel squirrel;
     private ScrollHandler scroller;
+    private boolean isAlive = true;
 
     public GameWorld() {
         squirrel = new Squirrel(MainConst.POSITIONXSQUIRREL, MainConst.POSITIONYSQUIRREL,
@@ -22,9 +23,23 @@ public class GameWorld {
     }
 
     public void update(float delta) {
+        // Добавим лимит для нашей delta, так что если игра начнет тормозить
+        // при обновлении, мы не нарушим нашу логику определения колизии
+
+        if (delta > .15f) {
+            delta = .15f;
+        }
+
 
         squirrel.update(delta);
         scroller.update(delta);
+
+        if (isAlive && scroller.collides(squirrel)) {
+            // Clean up on game over
+            scroller.stop();
+            squirrel.die();
+            isAlive = false;
+        }
 
     }
 

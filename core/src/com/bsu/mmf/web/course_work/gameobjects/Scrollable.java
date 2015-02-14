@@ -37,6 +37,10 @@ public class Scrollable {
         isScrolledLeft = false;
     }
 
+    public void stop() {
+        velocity.y = 0;
+    }
+
     // Методы доступа к переменым класса
     public boolean isScrolledLeft() {
         return isScrolledLeft;

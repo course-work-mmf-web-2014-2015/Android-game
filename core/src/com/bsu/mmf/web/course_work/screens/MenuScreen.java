@@ -22,6 +22,8 @@ public class MenuScreen  implements Screen, InputProcessor {
     private boolean downBtn;
     private TextureRegion bgMenu, button1, button2;
 
+    private float gameWidthK;
+
     public MenuScreen(OurGame game) {
         this.game = game;
 
@@ -38,6 +40,8 @@ public class MenuScreen  implements Screen, InputProcessor {
         button2 = AssetLoader.button2;
 
         downBtn = false;
+
+        gameWidthK = Gdx.graphics.getWidth() /  MainConst.GEMEWIDTH ;
     }
 
 
@@ -52,14 +56,16 @@ public class MenuScreen  implements Screen, InputProcessor {
         batcher.begin();
         batcher.disableBlending();
 
-        batcher.draw(bgMenu, 0, 0,  MainConst.GEMEWIDTH, 1200);
+        batcher.draw(bgMenu, 0, 0,  MainConst.GEMEWIDTH, bgMenu.getRegionHeight());
 
         batcher.enableBlending();
 
         if (downBtn)
-             batcher.draw(button2,  MainConst.GEMEWIDTH/2 - 70,  MainConst.GEMEHEIGHT/2 ,  138, 136);
+             batcher.draw(button2,  MainConst.GEMEWIDTH/2 - button2.getRegionWidth()/2,  MainConst.GEMEHEIGHT/2 ,
+                     button2.getRegionWidth(), button2.getRegionHeight());
         else
-            batcher.draw(button1, MainConst.GEMEWIDTH / 2 - 70, MainConst.GEMEHEIGHT/2, 138, 136);
+            batcher.draw(button1,  MainConst.GEMEWIDTH/2 - button1.getRegionWidth()/2,  MainConst.GEMEHEIGHT/2 ,
+                    button1.getRegionWidth(), button1.getRegionHeight());
 
         batcher.end();
     }
@@ -108,7 +114,11 @@ public class MenuScreen  implements Screen, InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        downBtn = true;
+        if ((screenX/ gameWidthK > MainConst.GEMEWIDTH / 2 - button1.getRegionWidth()/2 )&&
+                (screenX/ gameWidthK < MainConst.GEMEWIDTH / 2 + button1.getRegionWidth()/2 ))
+            if ((screenY / gameWidthK > MainConst.GEMEHEIGHT/2 )&&
+                    (screenY / gameWidthK < MainConst.GEMEHEIGHT/2 + button1.getRegionHeight()))
+                  downBtn = true;
         return true;
     }
 
@@ -120,9 +130,10 @@ public class MenuScreen  implements Screen, InputProcessor {
         if(downBtn){
             dispose();
             game.setScreen(game.game);
+            downBtn = false;
         }
 
-        downBtn = false;
+
         return true;
     }
 

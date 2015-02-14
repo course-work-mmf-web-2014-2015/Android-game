@@ -18,6 +18,7 @@ public class AssetLoader {
     public static Animation iceAnimation;
     public static TextureRegion squirrel1, squirrel2, squirrel3;
     public static TextureRegion ice1, ice2;
+    public static TextureRegion icicles;
 
 
     public static Texture textureForMenu;
@@ -40,6 +41,9 @@ public class AssetLoader {
 
         squirrel3 = new TextureRegion(texture, 800, 0, 100, 100);
         squirrel3.flip(false, true);
+
+        icicles = new TextureRegion(texture, 600, 500, 107, 92);
+        icicles.flip(false, true);
 
         ice1 = new TextureRegion(texture, 600, 100, 200, 162);
         ice2 = new TextureRegion(texture, 600, 300, 200, 146);

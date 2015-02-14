@@ -14,12 +14,19 @@ public class MainConst {
 
     public static final float POSITIONXSQUIRREL = GEMEWIDTH/2 - WIDTHSQUIRREL/2;
     public static final float POSITIONYSQUIRREL = 100;
-    public static final float CIRCLERADIUSSQUIRREL = 50;
+    public static final float CIRCLERADIUSSQUIRREL = 46;
     public static final float ANIMATIONSQUIRREL = 0.3f;
 
-    public static final float SWYPE = 450;
+    public static final float DISTANCEICICLES = 220;
+    public static final float WIDTHICICLES = 100;
+    public static final float HEIGHTICICLES = 92;
 
-    public static final int SCROLL_SPEED = -500;
+    public static final float WIDTHISE = 200;
+    public static final float HEIGHTISE = 160;
+
+    public static final float SWYPE = 550;
+
+    public static final int SCROLL_SPEED = -600;
 
 
 
