@@ -126,4 +126,13 @@ public class Squirrel {
         return boundingCircle;
     }
 
+    public void onRestart() {
+        position.y = MainConst.POSITIONYSQUIRREL;
+        position.x = MainConst.POSITIONXSQUIRREL;
+        velocity.x = 0;
+        isAlive = true;
+        positionInBg = 3;
+        tempX = positionInBg;
+    }
+
 }

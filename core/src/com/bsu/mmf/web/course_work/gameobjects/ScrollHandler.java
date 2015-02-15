@@ -10,9 +10,10 @@ public class ScrollHandler {
     private BackgroundScroll frontBg, backBg;
     private Icicles icicles1,icicles2,icicles3,icicles4;
     private int distansOfIcicles;
+    private int scrolSpeed;
 
     public ScrollHandler() {
-        int scrolSpeed = MainConst.SCROLL_SPEED;
+        scrolSpeed = MainConst.SCROLL_SPEED;
         int width = (int) MainConst.GEMEWIDTH;
         int heightBg = (int) MainConst.HEIGHTBACKGROUND;
         distansOfIcicles = (int) MainConst.DISTANCEICICLES ;
@@ -40,23 +41,23 @@ public class ScrollHandler {
 
         // проверяем кто из объектов за границей
         // и соответственно сбрасываем параметры этого объекта
-        if (icicles1.isScrolledLeft()) {
+        if (icicles1.isScrolled()) {
             icicles1.reset(icicles4.getTailY() + distansOfIcicles);
-        } else if (icicles2.isScrolledLeft()) {
+        } else if (icicles2.isScrolled()) {
             icicles2.reset(icicles1.getTailY() + distansOfIcicles);
 
-        } else if (icicles3.isScrolledLeft()) {
+        } else if (icicles3.isScrolled()) {
             icicles3.reset(icicles2.getTailY() + distansOfIcicles);
         }
-        else if (icicles4.isScrolledLeft()) {
+        else if (icicles4.isScrolled()) {
             icicles4.reset(icicles3.getTailY() + distansOfIcicles);
         }
 
 
-        if (frontBg.isScrolledLeft()) {
+        if (frontBg.isScrolled()) {
             frontBg.reset(backBg.getTailY());
 
-        } else if (backBg.isScrolledLeft()) {
+        } else if (backBg.isScrolled()) {
             backBg.reset(frontBg.getTailY());
 
         }
@@ -72,7 +73,7 @@ public class ScrollHandler {
         icicles3.stop();
         icicles4.stop();}
 
-    // вернуть True если какая-нибудь из труб коснулась птицы
+
     public boolean collides(Squirrel squirrel) {
         return (icicles1.collides(squirrel) || icicles2.collides(squirrel) ||
                 icicles3.collides(squirrel) || icicles4.collides(squirrel));
@@ -103,6 +104,16 @@ public class ScrollHandler {
 
     public BackgroundScroll getBackBg() {
         return backBg;
+    }
+
+
+    public void onRestart() {
+        frontBg.onRestart(0, scrolSpeed);
+        backBg.onRestart(frontBg.getTailY(), scrolSpeed);
+        icicles1.onRestart(500, scrolSpeed);
+        icicles2.onRestart(icicles1.getTailY() + distansOfIcicles, scrolSpeed);
+        icicles3.onRestart(icicles2.getTailY() + distansOfIcicles, scrolSpeed);
+        icicles4.onRestart(icicles3.getTailY() + distansOfIcicles, scrolSpeed);
     }
 
 

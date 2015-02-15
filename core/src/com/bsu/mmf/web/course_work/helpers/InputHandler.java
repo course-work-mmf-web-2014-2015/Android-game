@@ -1,6 +1,8 @@
 package com.bsu.mmf.web.course_work.helpers;
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.bsu.mmf.web.course_work.OurGame;
 import com.bsu.mmf.web.course_work.gameobjects.Squirrel;
 
 /**
@@ -9,19 +11,27 @@ import com.bsu.mmf.web.course_work.gameobjects.Squirrel;
 public class InputHandler implements InputProcessor {
 
     private Squirrel mysquirrel;
+    private OurGame game;
 
-    public InputHandler(Squirrel squirrel) {
+    public InputHandler(Squirrel squirrel , OurGame game) {
+        this.game = game;
         mysquirrel = squirrel;
     }
 
     @Override
     public boolean keyDown(int keycode) {
         return true;
+
     }
 
     @Override
     public boolean keyUp(int keycode) {
-        return false;
+        if(keycode == Input.Keys.BACK ){
+            game.game.world.restart();
+            game.game.dispose();
+            game.setScreen(game.menu);
+        }
+        return true;
     }
 
     @Override

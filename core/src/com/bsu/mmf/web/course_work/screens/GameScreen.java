@@ -21,7 +21,7 @@ public class GameScreen implements Screen {
 
     private OurGame game;
 
-    private GameWorld world;
+    public GameWorld world;
     private GameRenderer renderer;
     private float runTime = 0;
 
@@ -39,7 +39,8 @@ public class GameScreen implements Screen {
 
     @Override
     public void show() {
-        Gdx.input.setInputProcessor(new InputHandler(world.getSquirrel()));
+        Gdx.input.setInputProcessor(new InputHandler(world.getSquirrel(),game ));
+        Gdx.input.setCatchBackKey(true);
     }
 
     @Override
@@ -67,10 +68,12 @@ public class GameScreen implements Screen {
     @Override
     public void hide() {
         Gdx.input.setInputProcessor(null);
+        Gdx.input.setCatchBackKey(false);
     }
 
     @Override
     public void dispose() {
         Gdx.input.setInputProcessor(null);
+        Gdx.input.setCatchBackKey(false);
     }
 }

@@ -24,8 +24,8 @@ public class Icicles extends Scrollable {
     }
 
     @Override
-    public void reset(float newX) {
-        super.reset(newX);
+    public void reset(float newY) {
+        super.reset(newY);
 
         tempX = r.nextInt(5) + 1 ;
         switch (tempX){
@@ -60,6 +60,12 @@ public class Icicles extends Scrollable {
             return (Intersector.overlaps(squirrel.getBoundingCircle(), boundingRectangle));
         }
         return false;
+    }
+
+
+    public void onRestart(float y, float scrollSpeed) {
+        velocity.y = scrollSpeed;
+        reset(y);
     }
 
 }

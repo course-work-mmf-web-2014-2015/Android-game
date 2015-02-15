@@ -55,5 +55,10 @@ public class GameWorld {
 
     }
 
+    public void restart(){
+        squirrel.onRestart();
+        scroller.onRestart();
+        isAlive = true;
+    }
 
 }

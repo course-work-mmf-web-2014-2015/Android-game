@@ -26,7 +26,7 @@ public class MainConst {
 
     public static final float SWYPE = 550;
 
-    public static final int SCROLL_SPEED = -600;
+    public static int SCROLL_SPEED = -600;
 
 
 

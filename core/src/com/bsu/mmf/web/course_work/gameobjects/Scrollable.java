@@ -11,14 +11,14 @@ public class Scrollable {
     protected Vector2 velocity;
     protected int width;
     protected int height;
-    protected boolean isScrolledLeft;
+    protected boolean isScrolled;
 
     public Scrollable(float x, float y, int width, int height, float scrollSpeed) {
         position = new Vector2(x, y);
         velocity = new Vector2(0, scrollSpeed);
         this.width = width;
         this.height = height;
-        isScrolledLeft = false;
+        isScrolled = false;
     }
 
     public void update(float delta) {
@@ -26,7 +26,7 @@ public class Scrollable {
 
         // Если объект Scrollable более не виден:
         if (position.y + height < 0) {
-            isScrolledLeft = true;
+            isScrolled = true;
         }
     }
 
@@ -34,7 +34,7 @@ public class Scrollable {
     // другое поведение
     public void reset(float newY) {
         position.y = newY;
-        isScrolledLeft = false;
+        isScrolled = false;
     }
 
     public void stop() {
@@ -42,8 +42,8 @@ public class Scrollable {
     }
 
     // Методы доступа к переменым класса
-    public boolean isScrolledLeft() {
-        return isScrolledLeft;
+    public boolean isScrolled() {
+        return isScrolled;
     }
 
     public float getTailY() {
