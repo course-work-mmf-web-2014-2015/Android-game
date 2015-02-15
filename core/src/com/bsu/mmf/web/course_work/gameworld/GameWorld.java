@@ -14,11 +14,13 @@ public class GameWorld {
     private ScrollHandler scroller;
     private boolean isAlive = true;
 
+    private int score = 0;
+
     public GameWorld() {
         squirrel = new Squirrel(MainConst.POSITIONXSQUIRREL, MainConst.POSITIONYSQUIRREL,
                 MainConst.WIDTHSQUIRREL ,  MainConst.HEIGHTSQUIRREL );
 
-        scroller = new ScrollHandler();
+        scroller = new ScrollHandler(this);
 
     }
 
@@ -55,10 +57,21 @@ public class GameWorld {
 
     }
 
+    public int getScore() {
+        return score;
+    }
+
+    public void addScore(int increment) {
+        score += increment;
+    }
+
     public void restart(){
         squirrel.onRestart();
         scroller.onRestart();
         isAlive = true;
+        score = 0;
     }
+
+
 
 }

@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -36,11 +37,15 @@ public class GameRenderer {
     private Animation squirrelAnimation;
     private Animation iceAnimation;
     private TextureRegion squirrel1, squirrel2, squirrel3;
+    public  TextureRegion stars;
+
+    public static BitmapFont font, shadow;
 
     private int widthIcicles;
     private int heightIcicles;
     private int widthIse;
     private int heightIse;
+    private int widthGEME;
 
     public GameRenderer(GameWorld world) {
         myWorld = world;
@@ -60,6 +65,7 @@ public class GameRenderer {
         heightIcicles = (int) MainConst.HEIGHTICICLES;
         widthIse = (int) MainConst.WIDTHISE;
         heightIse = (int) MainConst.HEIGHTISE;
+        widthGEME = (int) MainConst.GEMEWIDTH;
     }
 
     private void initGameObjects() {
@@ -79,9 +85,12 @@ public class GameRenderer {
         icicles = AssetLoader.icicles;
         squirrelAnimation = AssetLoader.squirrelAnimation;
         iceAnimation = AssetLoader.iceAnimation;
+        stars = AssetLoader.stars;
        // squirrel1 = AssetLoader.squirrel1;   // пока что не нужно
        // squirrel2 = AssetLoader.squirrel2;
        // squirrel3 = AssetLoader.squirrel3;
+        font = AssetLoader.font;
+        shadow = AssetLoader.shadow;
      }
 
     public void render(float runTime) {
@@ -110,13 +119,17 @@ public class GameRenderer {
             batcher.draw(squirrelAnimation.getKeyFrame(runTime),
                     squirrel.getX(), squirrel.getY(), squirrel.getWidth(), squirrel.getHeight());
 
-            batcher.end();
-
-      //  }else {
 
 
-       // }
 
+        // Сначала отрисовываем тень
+        shadow.draw(batcher, "" + myWorld.getScore(),  widthGEME - 29 , 6);
+        // Отрисуем сам текст
+        font.draw(batcher, "" + myWorld.getScore(), widthGEME - 30, 6);
+
+        batcher.draw(stars,widthGEME - 60 , 0 ,stars.getRegionWidth(), stars.getRegionHeight());
+
+        batcher.end();
 
        // нужно для проверки пересечения...отрисока
         //shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);

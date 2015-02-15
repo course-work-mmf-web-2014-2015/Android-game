@@ -3,6 +3,7 @@ package com.bsu.mmf.web.course_work.helpers;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.bsu.mmf.web.course_work.MainConst;
 
@@ -19,7 +20,9 @@ public class AssetLoader {
     public static TextureRegion squirrel1, squirrel2, squirrel3;
     public static TextureRegion ice1, ice2;
     public static TextureRegion icicles;
+    public static TextureRegion stars;
 
+    public static BitmapFont font, shadow;
 
     public static Texture textureForMenu;
     public static TextureRegion bgMenu;
@@ -45,6 +48,9 @@ public class AssetLoader {
         icicles = new TextureRegion(texture, 600, 500, 107, 92);
         icicles.flip(false, true);
 
+        stars = new TextureRegion(texture, 800, 300, 25, 25);
+        stars.flip(false, true);
+
         ice1 = new TextureRegion(texture, 600, 100, 200, 162);
         ice2 = new TextureRegion(texture, 600, 300, 200, 146);
 
@@ -58,7 +64,10 @@ public class AssetLoader {
         iceAnimation.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
 
 
-
+        font = new BitmapFont(Gdx.files.internal("fnt/text.fnt"));
+        font.setScale(.25f, -.25f);
+        shadow = new BitmapFont(Gdx.files.internal("fnt/shadow.fnt"));
+        shadow.setScale(.25f, -.25f);
 
 
         //for menu
@@ -80,6 +89,8 @@ public class AssetLoader {
         // Мы должны избавляться от текстур, когда заканчивает работать с объектом в котором есть текстуры
         texture.dispose();
         textureForMenu.dispose();
+        font.dispose();
+        shadow.dispose();
     }
 
 }
