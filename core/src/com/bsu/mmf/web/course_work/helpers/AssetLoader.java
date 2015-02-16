@@ -21,7 +21,9 @@ public class AssetLoader {
     public static TextureRegion ice1, ice2;
     public static TextureRegion icicles;
     public static TextureRegion stars;
+    public static TextureRegion acorn;
 
+    public static TextureRegion squirrelBum;
     public static BitmapFont font, shadow;
 
     public static Texture textureForMenu;
@@ -50,6 +52,12 @@ public class AssetLoader {
 
         stars = new TextureRegion(texture, 800, 300, 25, 25);
         stars.flip(false, true);
+
+        squirrelBum = new TextureRegion(texture, 600, 600, 160, 112);
+        squirrelBum.flip(false, true);
+
+        acorn = new TextureRegion(texture, 800, 600, 40, 40);
+        acorn.flip(false, true);
 
         ice1 = new TextureRegion(texture, 600, 100, 200, 162);
         ice2 = new TextureRegion(texture, 600, 300, 200, 146);

@@ -24,6 +24,10 @@ public class MainConst {
     public static final float WIDTHISE = 200;
     public static final float HEIGHTISE = 160;
 
+    public static final float CIRCLERADIUSACORN = 20;
+    public static final float WIDTHACORN  = 40;
+    public static final float HEIGHTACORN  = 40;
+
     public static final float SWYPE = 550;
 
     public static int SCROLL_SPEED = -600;
