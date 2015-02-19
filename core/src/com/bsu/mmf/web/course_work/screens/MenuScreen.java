@@ -42,6 +42,7 @@ public class MenuScreen  implements Screen, InputProcessor {
         downBtn = false;
 
         gameWidthK = Gdx.graphics.getWidth() /  MainConst.GEMEWIDTH ;
+        MainConst.GEMEWIDTHK = gameWidthK;
     }
 
 

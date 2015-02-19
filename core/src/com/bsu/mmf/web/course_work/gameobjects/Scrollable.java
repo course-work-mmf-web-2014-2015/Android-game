@@ -12,10 +12,12 @@ public class Scrollable {
     protected int width;
     protected int height;
     protected boolean isScrolled;
+    private float scrollSpeed;
 
     public Scrollable(float x, float y, int width, int height, float scrollSpeed) {
         position = new Vector2(x, y);
         velocity = new Vector2(0, scrollSpeed);
+        this.scrollSpeed = scrollSpeed;
         this.width = width;
         this.height = height;
         isScrolled = false;
@@ -39,6 +41,10 @@ public class Scrollable {
 
     public void stop() {
         velocity.y = 0;
+    }
+
+    public void play() {
+        velocity.y = scrollSpeed;
     }
 
     // Методы доступа к переменым класса

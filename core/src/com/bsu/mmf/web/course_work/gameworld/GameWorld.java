@@ -15,7 +15,7 @@ public class GameWorld {
     private Acorn acorns;
     private ScrollHandler scroller;
     private boolean isAlive = true;
-    public boolean inScreen = false;
+    public boolean inPause = false;
 
     private int score = 0;
     private int score2 = 0;
@@ -51,7 +51,6 @@ public class GameWorld {
         }
 
         acorns.setPosition( posXtemp  , scroller.getIcicles4().getY() - 150);
-        inScreen = true;
 
 
         if (isAlive && scroller.collides(squirrel)) {
@@ -61,9 +60,8 @@ public class GameWorld {
             isAlive = false;
         }
 
-        if (inScreen && acorns.collides(squirrel)) {
+        if (acorns.collides(squirrel)) {
             addScore2(1);                                         //добавить один жёлудь к всему
-            inScreen = false;
         }
 
 
@@ -79,6 +77,12 @@ public class GameWorld {
 
     }
 
+    public ScrollHandler getScrollHandler() {
+
+        return scroller;
+
+    }
+
     public Acorn getAcorn() {
 
         return acorns;
@@ -90,9 +94,9 @@ public class GameWorld {
         return isAlive;
     }
 
-    public boolean inScreen() {
+    public boolean isPause() {
 
-        return inScreen;
+        return inPause;
     }
 
     public ScrollHandler getScroller() {
@@ -123,7 +127,6 @@ public class GameWorld {
         isAlive = true;
         score = 0;
         score2 = 0;
-        inScreen = false;
     }
 
 

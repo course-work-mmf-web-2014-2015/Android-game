@@ -6,6 +6,7 @@ package com.bsu.mmf.web.course_work;
 public class MainConst {
     public static final float GEMEWIDTH = 540;
     public static float GEMEHEIGHT = 750;    // меняется от экрана
+    public static float  GEMEWIDTHK ;
 
     public static final float WIDTHSQUIRREL = 100;
     public static final float HEIGHTSQUIRREL = 100;

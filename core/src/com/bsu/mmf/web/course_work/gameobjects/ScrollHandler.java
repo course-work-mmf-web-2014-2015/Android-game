@@ -82,7 +82,17 @@ public class ScrollHandler {
         icicles1.stop();
         icicles2.stop();
         icicles3.stop();
-        icicles4.stop();}
+        icicles4.stop();
+    }
+
+    public void play() {
+        frontBg.play();
+        backBg.play();
+        icicles1.play();
+        icicles2.play();
+        icicles3.play();
+        icicles4.play();
+    }
 
 
     public boolean collides(Squirrel squirrel) {

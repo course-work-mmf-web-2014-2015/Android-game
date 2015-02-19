@@ -40,8 +40,12 @@ public class GameRenderer {
     private Animation iceAnimation;
     private TextureRegion squirrel1, squirrel2, squirrel3;
     public  TextureRegion stars;
+    public  TextureRegion pause;
     public  TextureRegion squirrelBum;
     public  TextureRegion acorn;
+    public static TextureRegion bgGameMenu;
+    public static TextureRegion buttonGameMenu;
+    public static TextureRegion buttonHome, buttonRest;
 
     public static BitmapFont font, shadow;
 
@@ -50,6 +54,7 @@ public class GameRenderer {
     private int widthIse;
     private int heightIse;
     private int widthGEME;
+    private int heightGEME;
 
     public GameRenderer(GameWorld world) {
         myWorld = world;
@@ -70,6 +75,7 @@ public class GameRenderer {
         widthIse = (int) MainConst.WIDTHISE;
         heightIse = (int) MainConst.HEIGHTISE;
         widthGEME = (int) MainConst.GEMEWIDTH;
+        heightGEME = (int) MainConst.GEMEHEIGHT;
     }
 
     private void initGameObjects() {
@@ -98,6 +104,11 @@ public class GameRenderer {
         shadow = AssetLoader.shadow;
         squirrelBum = AssetLoader.squirrelBum;
         acorn = AssetLoader.acorn;
+        pause = AssetLoader.pause;
+        bgGameMenu = AssetLoader.bgGameMenu;
+        buttonGameMenu = AssetLoader.buttonGameMenu;
+        buttonHome = AssetLoader.buttonHome;
+        buttonRest = AssetLoader.buttonRest;
      }
 
     public void render(float runTime) {
@@ -117,7 +128,9 @@ public class GameRenderer {
         batcher.draw(icicles, icicles4.getX(), icicles4.getY(),widthIcicles, heightIcicles);
 
 
-        if (acorns.inScreen() == true){
+
+
+        if (acorns.inScreen()){
             batcher.draw(acorn, acorns.getX(), acorns.getY(),acorn.getRegionWidth(), acorn.getRegionHeight());
         }
 
@@ -129,7 +142,7 @@ public class GameRenderer {
 
 
 
-        if (myWorld.isAlive() == false){
+        if (!myWorld.isAlive()){
             batcher.draw(squirrelBum, squirrel.getX() - squirrel.getWidth()/4, squirrel.getY(),
                     squirrelBum.getRegionWidth(), squirrelBum.getRegionHeight());
         }else {
@@ -147,11 +160,38 @@ public class GameRenderer {
         font.draw(batcher, "" + myWorld.getScore(), widthGEME - 30, 6);
 
         shadow.draw(batcher, "" + myWorld.getScore2(),  widthGEME - 59 - stars.getRegionWidth() , 6);
-        // Отрисуем сам текст
         font.draw(batcher, "" + myWorld.getScore2(), widthGEME - 60 - stars.getRegionWidth(), 6);
 
         batcher.draw(stars,widthGEME - 60 , 0 ,stars.getRegionWidth(), stars.getRegionHeight());
         batcher.draw(acorn, widthGEME - 90 - stars.getRegionWidth(),  2 ,stars.getRegionWidth(), stars.getRegionHeight());
+
+        batcher.draw(pause, widthGEME - 34 , heightGEME - 40 ,pause.getRegionWidth(), pause.getRegionHeight());
+
+
+        if (myWorld.isPause()){
+            batcher.draw(bgGameMenu,120 , 200 ,bgGameMenu.getRegionWidth(), bgGameMenu.getRegionHeight());
+            batcher.draw(buttonGameMenu,120 + (300 - buttonGameMenu.getRegionWidth())/2 , 500-buttonGameMenu.getRegionWidth()-100 ,
+                    buttonGameMenu.getRegionWidth(), buttonGameMenu.getRegionWidth());
+
+            batcher.draw(buttonHome,120 + (300 - buttonGameMenu.getRegionWidth())/2  -138/2 , 500-buttonGameMenu.getRegionWidth()-50 ,
+                    buttonHome.getRegionWidth()-50, buttonHome.getRegionWidth()-50);
+            batcher.draw(buttonRest,120 + (300 - buttonGameMenu.getRegionWidth())/2+138+10, 500-buttonGameMenu.getRegionWidth()-50 ,
+                    buttonRest.getRegionWidth()-50, buttonRest.getRegionWidth()-50);
+
+            batcher.draw(stars,120 + 20 + 140  ,200 + bgGameMenu.getRegionHeight() - 50-6,
+                    stars.getRegionWidth(), stars.getRegionHeight());
+
+            batcher.draw(acorn, 120 + 40,  200 + bgGameMenu.getRegionHeight() - 50-4 ,
+                    stars.getRegionWidth(), stars.getRegionHeight());
+
+
+            shadow.draw(batcher, "" + myWorld.getScore(),  120 + 20 + 160 +stars.getRegionWidth() , 200 + bgGameMenu.getRegionHeight() - 50);
+            font.draw(batcher, "" + myWorld.getScore(), 120 + 20 + 160-1 +stars.getRegionWidth(), 200 + bgGameMenu.getRegionHeight() - 50);
+            shadow.draw(batcher, "" + myWorld.getScore2(),  120 + 40 +acorn.getRegionWidth(), 200 + bgGameMenu.getRegionHeight() - 50);
+            font.draw(batcher, "" + myWorld.getScore2(),  120 + 40-1+acorn.getRegionWidth(), 200 + bgGameMenu.getRegionHeight() - 50);
+
+        }
+
 
         batcher.end();
 

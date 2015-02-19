@@ -46,7 +46,7 @@ public class Acorn {
             }
 
         }
-        //inScreen = true;
+
         else {
             inScreen = true;
             return false;

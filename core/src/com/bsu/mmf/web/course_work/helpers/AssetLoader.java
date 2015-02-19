@@ -24,11 +24,17 @@ public class AssetLoader {
     public static TextureRegion acorn;
 
     public static TextureRegion squirrelBum;
+    public static TextureRegion pause;
     public static BitmapFont font, shadow;
 
     public static Texture textureForMenu;
     public static TextureRegion bgMenu;
     public static TextureRegion button1, button2;
+    public static TextureRegion buttonHome, buttonRest;
+
+    public static Texture textureForGameMenu;
+    public static TextureRegion bgGameMenu;
+    public static TextureRegion buttonGameMenu;
 
     public static void load() {
 
@@ -58,6 +64,9 @@ public class AssetLoader {
 
         acorn = new TextureRegion(texture, 800, 600, 40, 40);
         acorn.flip(false, true);
+
+        pause = new TextureRegion(texture, 600, 740, 20, 24);
+        pause.flip(false, true);
 
         ice1 = new TextureRegion(texture, 600, 100, 200, 162);
         ice2 = new TextureRegion(texture, 600, 300, 200, 146);
@@ -91,6 +100,27 @@ public class AssetLoader {
 
         button2 = new TextureRegion(textureForMenu, 800, 0, 138, 136);
         button2.flip(false, true);
+
+        buttonHome =  new TextureRegion(textureForMenu, 800, 150, 100, 100);
+        buttonHome.flip(false, true);
+
+        buttonRest =  new TextureRegion(textureForMenu, 600, 150, 100, 78);
+        buttonRest.flip(false, true);
+
+
+
+        // for GameMenu
+
+        textureForGameMenu = new Texture(Gdx.files.internal("img/game-menu.png"));
+        textureForGameMenu.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
+
+        bgGameMenu = new TextureRegion(textureForGameMenu, 0, 0, 300, 300);
+        bgGameMenu.flip(false, true);
+
+        buttonGameMenu = new TextureRegion(textureForMenu, 600, 0, 138, 136);
+        buttonGameMenu.flip(false, true);
+
+
     }
 
     public static void dispose() {

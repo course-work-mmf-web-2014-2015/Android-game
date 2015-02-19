@@ -39,7 +39,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void show() {
-        Gdx.input.setInputProcessor(new InputHandler(world.getSquirrel(),game ));
+        Gdx.input.setInputProcessor(new InputHandler(world,game ));
         Gdx.input.setCatchBackKey(true);
     }
 
