@@ -12,7 +12,6 @@ import java.util.Random;
 public class Icicles extends Scrollable {
 
     private Random r;
-    private int tempX;
     private static float posSq = MainConst.POSITIONXSQUIRREL;
     private Rectangle boundingRectangle;
 
@@ -27,7 +26,7 @@ public class Icicles extends Scrollable {
     public void reset(float newY) {
         super.reset(newY);
 
-        tempX = r.nextInt(5) + 1 ;
+        int tempX = r.nextInt(5) + 1;
         switch (tempX){
             case 1: position.x = posSq - 200; break;
             case 2: position.x = posSq - 100; break;

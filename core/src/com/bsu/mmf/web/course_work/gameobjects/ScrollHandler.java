@@ -74,6 +74,7 @@ public class ScrollHandler {
 
     private void addScore(int increment) {
         gameWorld.addScore(increment);
+
     }
 
     public void stop() {
@@ -102,7 +103,6 @@ public class ScrollHandler {
 
 
 
-    // методы доступа к переменным класса
     public BackgroundScroll getFrontBg() {
         return frontBg;
     }

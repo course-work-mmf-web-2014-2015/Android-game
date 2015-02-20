@@ -38,7 +38,7 @@ public class GameRenderer {
     public  TextureRegion icicles;
     private Animation squirrelAnimation;
     private Animation iceAnimation;
-    private TextureRegion squirrel1, squirrel2, squirrel3;
+    private TextureRegion squirrel1;
     public  TextureRegion stars;
     public  TextureRegion pause;
     public  TextureRegion squirrelBum;
@@ -97,9 +97,7 @@ public class GameRenderer {
         squirrelAnimation = AssetLoader.squirrelAnimation;
         iceAnimation = AssetLoader.iceAnimation;
         stars = AssetLoader.stars;
-       // squirrel1 = AssetLoader.squirrel1;   // пока что не нужно
-       // squirrel2 = AssetLoader.squirrel2;
-       // squirrel3 = AssetLoader.squirrel3;
+        squirrel1 = AssetLoader.squirrel1;
         font = AssetLoader.font;
         shadow = AssetLoader.shadow;
         squirrelBum = AssetLoader.squirrelBum;
@@ -114,46 +112,77 @@ public class GameRenderer {
     public void render(float runTime) {
 
         batcher.begin();
-        batcher.disableBlending();
 
+        drawBackgroundScroll();
+        drawIciclesAndAcorns();
+        drawSquirrel( runTime);
+        drawScore();
+        drawMenu();
+
+        batcher.end();
+
+       // нужно для проверки пересечения...отрисока
+        //shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        //shapeRenderer.setColor(Color.RED);
+        //shapeRenderer.circle(acorns.getBoundingCircle().x, acorns.getBoundingCircle().y, acorns.getBoundingCircle().radius);
+        //shapeRenderer.circle(squirrel.getBoundingCircle().x, squirrel.getBoundingCircle().y, squirrel.getBoundingCircle().radius);
+
+        //shapeRenderer.rect(icicles1.getBoundingRectangle().x, icicles1.getBoundingRectangle().y,
+        //        icicles1.getBoundingRectangle().width, icicles1.getBoundingRectangle().height);
+        //shapeRenderer.rect(icicles2.getBoundingRectangle().x, icicles2.getBoundingRectangle().y,
+        //        icicles2.getBoundingRectangle().width, icicles2.getBoundingRectangle().height);
+        //shapeRenderer.rect(icicles3.getBoundingRectangle().x, icicles3.getBoundingRectangle().y,
+        //        icicles3.getBoundingRectangle().width, icicles3.getBoundingRectangle().height);
+        //shapeRenderer.rect(icicles4.getBoundingRectangle().x, icicles4.getBoundingRectangle().y,
+        //        icicles4.getBoundingRectangle().width, icicles4.getBoundingRectangle().height);
+        //shapeRenderer.end();
+
+    }
+
+
+    private void drawSquirrel(float runTime){
+        // Отрисуем на координатах. Получим Animation объект из AssetLoader
+        // Передадим runTime переменную чтобы получить текущий кадр.
+        if (!myWorld.isAlive()){
+            batcher.draw(squirrelBum, squirrel.getX() - squirrel.getWidth()/4, squirrel.getY(),
+                    squirrelBum.getRegionWidth(), squirrelBum.getRegionHeight());
+        }else {
+
+            if (!myWorld.isPause()){
+                batcher.draw(iceAnimation.getKeyFrame(runTime),
+                        squirrel.getX() - squirrel.getWidth()/2, squirrel.getY() - squirrel.getWidth()/2, widthIse, heightIse);
+
+                batcher.draw(squirrelAnimation.getKeyFrame(runTime),
+                        squirrel.getX(), squirrel.getY(), squirrel.getWidth(), squirrel.getHeight());
+            }
+            else
+                batcher.draw(squirrel1,
+                        squirrel.getX(), squirrel.getY(), squirrel.getWidth(), squirrel.getHeight());
+
+        }
+    }
+
+    private void drawBackgroundScroll( ){
+        batcher.disableBlending();
         batcher.draw(bg, frontBg.getX(), frontBg.getY(),frontBg.getWidth(), frontBg.getHeight());
         batcher.draw(bg, backBg.getX(), backBg.getY(), backBg.getWidth(), backBg.getHeight());
-
         // нужна прозрачность, поэтому включаем ее
         batcher.enableBlending();
+    }
 
+    private void drawIciclesAndAcorns( ){
         batcher.draw(icicles, icicles1.getX(), icicles1.getY(),widthIcicles, heightIcicles);
         batcher.draw(icicles, icicles2.getX(), icicles2.getY(),widthIcicles, heightIcicles);
         batcher.draw(icicles, icicles3.getX(), icicles3.getY(),widthIcicles, heightIcicles);
         batcher.draw(icicles, icicles4.getX(), icicles4.getY(),widthIcicles, heightIcicles);
 
 
-
-
         if (acorns.inScreen()){
             batcher.draw(acorn, acorns.getX(), acorns.getY(),acorn.getRegionWidth(), acorn.getRegionHeight());
         }
+    }
 
-
-
-        // Отрисуем на координатах. Получим Animation объект из AssetLoader
-        // Передадим runTime переменную чтобы получить текущий кадр.
-
-
-
-
-        if (!myWorld.isAlive()){
-            batcher.draw(squirrelBum, squirrel.getX() - squirrel.getWidth()/4, squirrel.getY(),
-                    squirrelBum.getRegionWidth(), squirrelBum.getRegionHeight());
-        }else {
-            batcher.draw(iceAnimation.getKeyFrame(runTime),
-                    squirrel.getX() - squirrel.getWidth()/2, squirrel.getY() - squirrel.getWidth()/2, widthIse, heightIse);
-
-            batcher.draw(squirrelAnimation.getKeyFrame(runTime),
-                    squirrel.getX(), squirrel.getY(), squirrel.getWidth(), squirrel.getHeight());
-        }
-
-
+    private void drawScore(){
         // Сначала отрисовываем тень
         shadow.draw(batcher, "" + myWorld.getScore(),  widthGEME - 29 , 6);
         // Отрисуем сам текст
@@ -166,8 +195,10 @@ public class GameRenderer {
         batcher.draw(acorn, widthGEME - 90 - stars.getRegionWidth(),  2 ,stars.getRegionWidth(), stars.getRegionHeight());
 
         batcher.draw(pause, widthGEME - 34 , heightGEME - 40 ,pause.getRegionWidth(), pause.getRegionHeight());
+    }
 
 
+    private void drawMenu(){
         if (myWorld.isPause()){
             batcher.draw(bgGameMenu,120 , 200 ,bgGameMenu.getRegionWidth(), bgGameMenu.getRegionHeight());
             batcher.draw(buttonGameMenu,120 + (300 - buttonGameMenu.getRegionWidth())/2 , 500-buttonGameMenu.getRegionWidth()-100 ,
@@ -191,26 +222,9 @@ public class GameRenderer {
             font.draw(batcher, "" + myWorld.getScore2(),  120 + 40-1+acorn.getRegionWidth(), 200 + bgGameMenu.getRegionHeight() - 50);
 
         }
-
-
-        batcher.end();
-
-       // нужно для проверки пересечения...отрисока
-        //shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        //shapeRenderer.setColor(Color.RED);
-        //shapeRenderer.circle(acorns.getBoundingCircle().x, acorns.getBoundingCircle().y, acorns.getBoundingCircle().radius);
-        //shapeRenderer.circle(squirrel.getBoundingCircle().x, squirrel.getBoundingCircle().y, squirrel.getBoundingCircle().radius);
-
-        //shapeRenderer.rect(icicles1.getBoundingRectangle().x, icicles1.getBoundingRectangle().y,
-        //        icicles1.getBoundingRectangle().width, icicles1.getBoundingRectangle().height);
-        //shapeRenderer.rect(icicles2.getBoundingRectangle().x, icicles2.getBoundingRectangle().y,
-        //        icicles2.getBoundingRectangle().width, icicles2.getBoundingRectangle().height);
-        //shapeRenderer.rect(icicles3.getBoundingRectangle().x, icicles3.getBoundingRectangle().y,
-        //        icicles3.getBoundingRectangle().width, icicles3.getBoundingRectangle().height);
-        //shapeRenderer.rect(icicles4.getBoundingRectangle().x, icicles4.getBoundingRectangle().y,
-        //        icicles4.getBoundingRectangle().width, icicles4.getBoundingRectangle().height);
-        //shapeRenderer.end();
-
     }
+
+
+
 
 }

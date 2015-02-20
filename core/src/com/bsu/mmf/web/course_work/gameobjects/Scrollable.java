@@ -47,7 +47,7 @@ public class Scrollable {
         velocity.y = scrollSpeed;
     }
 
-    // Методы доступа к переменым класса
+
     public boolean isScrolled() {
         return isScrolled;
     }
