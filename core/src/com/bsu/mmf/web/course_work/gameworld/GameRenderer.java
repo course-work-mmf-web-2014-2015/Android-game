@@ -146,6 +146,7 @@ public class GameRenderer {
         if (!myWorld.isAlive()){
             batcher.draw(squirrelBum, squirrel.getX() - squirrel.getWidth()/4, squirrel.getY(),
                     squirrelBum.getRegionWidth(), squirrelBum.getRegionHeight());
+
         }else {
 
             if (!myWorld.isPause()){
@@ -158,6 +159,7 @@ public class GameRenderer {
             else
                 batcher.draw(squirrel1,
                         squirrel.getX(), squirrel.getY(), squirrel.getWidth(), squirrel.getHeight());
+
 
         }
     }
@@ -201,6 +203,13 @@ public class GameRenderer {
     private void drawMenu(){
         if (myWorld.isPause()){
             batcher.draw(bgGameMenu,120 , 200 ,bgGameMenu.getRegionWidth(), bgGameMenu.getRegionHeight());
+            shadow.setScale(.40f, -.40f);
+            font.setScale(.40f, -.40f);
+            shadow.draw(batcher,"MENU",  220 + 10 , 200 + 20 );
+            font.draw(batcher,"MENU" ,  220 + 10-1, 200 + 20 );
+            shadow.setScale(.29f, -.29f);
+            font.setScale(.29f, -.29f);
+
             batcher.draw(buttonGameMenu,120 + (300 - buttonGameMenu.getRegionWidth())/2 , 500-buttonGameMenu.getRegionWidth()-100 ,
                     buttonGameMenu.getRegionWidth(), buttonGameMenu.getRegionWidth());
 
@@ -221,6 +230,40 @@ public class GameRenderer {
             shadow.draw(batcher, "" + myWorld.getScore2(),  120 + 40 +acorn.getRegionWidth(), 200 + bgGameMenu.getRegionHeight() - 50);
             font.draw(batcher, "" + myWorld.getScore2(),  120 + 40-1+acorn.getRegionWidth(), 200 + bgGameMenu.getRegionHeight() - 50);
 
+
+            shadow.setScale(.40f, -.40f);
+            font.setScale(.40f, -.40f);
+
+            batcher.draw(bgGameMenu,120 , 200+ bgGameMenu.getRegionHeight() + 30 ,bgGameMenu.getRegionWidth(),
+                    bgGameMenu.getRegionHeight());
+            shadow.draw(batcher,"TOP 5 SCORE",  180 + 10 , 200 + bgGameMenu.getRegionHeight() + 50 );
+            font.draw(batcher,"TOP 5 SCORE" ,  180 + 10-1, 200 + bgGameMenu.getRegionHeight() + 50 );
+
+            shadow.draw(batcher,"YOUR: " + myWorld.getScoreSum(),  200 + 10 , 200 + bgGameMenu.getRegionHeight()*2  );
+            font.draw(batcher,"YOUR: " + myWorld.getScoreSum(),  200 + 10-1, 200 + bgGameMenu.getRegionHeight()*2  );
+
+            if (AssetLoader.listScore.get(0) == myWorld.getScoreSum()){
+                shadow.setScale(.70f, -.70f);
+                font.setScale(.70f, -.70f);
+
+                shadow.draw(batcher,"NEW RECORD!", 120  ,  100 );
+                font.draw(batcher,"NEW RECORD!" , 120 ,  100 );
+
+                shadow.setScale(.40f, -.40f);
+                font.setScale(.40f, -.40f);
+
+            }
+
+            for (int i = 0; i<5 ; i++){
+                int temp = AssetLoader.listScore.get(i);
+
+                shadow.draw(batcher,i+1 + ". - " + temp,  200 + 30 , 200 + bgGameMenu.getRegionHeight() + 120 + i*30);
+                font.draw(batcher,i+1 + ". - " + temp,  200 + 30-1, 200 + bgGameMenu.getRegionHeight() + 120 + i*30);
+
+            }
+
+            shadow.setScale(.29f, -.29f);
+            font.setScale(.29f, -.29f);
         }
     }
 

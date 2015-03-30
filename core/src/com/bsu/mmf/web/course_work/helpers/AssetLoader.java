@@ -1,11 +1,16 @@
 package com.bsu.mmf.web.course_work.helpers;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.bsu.mmf.web.course_work.MainConst;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Anton on 07.02.2015.
@@ -35,6 +40,9 @@ public class AssetLoader {
     public static Texture textureForGameMenu;
     public static TextureRegion bgGameMenu;
     public static TextureRegion buttonGameMenu;
+
+    public static Preferences prefs;             // переменная сохранения счёта в файл
+    public static ArrayList<Integer> listScore;
 
     public static void load() {
 
@@ -82,9 +90,9 @@ public class AssetLoader {
 
 
         font = new BitmapFont(Gdx.files.internal("fnt/text.fnt"));
-        font.setScale(.25f, -.25f);
+        font.setScale(.29f, -.29f);
         shadow = new BitmapFont(Gdx.files.internal("fnt/shadow.fnt"));
-        shadow.setScale(.25f, -.25f);
+        shadow.setScale(.29f, -.29f);
 
 
         //for menu
@@ -121,9 +129,27 @@ public class AssetLoader {
         buttonGameMenu.flip(false, true);
 
 
+        prefs = Gdx.app.getPreferences("SqwirrelScoreList");
+        listScore =  new ArrayList<Integer>();
+
+
+        for (int i = 0; i<5 ; i++){
+            listScore.add(prefs.getInteger("" + i));
+        }
+
+
+
+
     }
 
     public static void dispose() {
+
+
+        for (int i = 0; i<5 ; i++){
+            prefs.putInteger("" + i , listScore.get(i));
+        }
+        prefs.flush();
+
         // Мы должны избавляться от текстур, когда заканчивает работать с объектом в котором есть текстуры
         texture.dispose();
         textureForMenu.dispose();

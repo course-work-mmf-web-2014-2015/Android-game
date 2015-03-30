@@ -16,7 +16,6 @@ public class InputHandler implements InputProcessor {
     private GameWorld myWorld;
     private Squirrel mysquirrel;
     private OurGame game;
-    private boolean inPause;
     private int widthGEME;
     private int heightGEME;
     private float gameWidthK;
@@ -25,7 +24,6 @@ public class InputHandler implements InputProcessor {
         this.game = game;
         this.myWorld = myWorld;
         mysquirrel = myWorld.getSquirrel();
-        inPause = false;
         myWorld.inPause = false;
 
         widthGEME = (int) MainConst.GEMEWIDTH;
@@ -36,7 +34,6 @@ public class InputHandler implements InputProcessor {
 
     public void playAll() {
         myWorld.getScrollHandler().play();
-        inPause = false;
         myWorld.inPause = false;
         mysquirrel.xtouchDown = 0;
         mysquirrel.xtouchUp = 0;
@@ -44,13 +41,11 @@ public class InputHandler implements InputProcessor {
     }
 
     public void stopAll() {
-        inPause = true;
         myWorld.inPause = true;
         myWorld.getScrollHandler().stop();
     }
 
     public void backAll() {
-        inPause = false;
         myWorld.inPause = false;
         mysquirrel.xtouchDown = 0;
         mysquirrel.xtouchUp = 0;
@@ -60,7 +55,6 @@ public class InputHandler implements InputProcessor {
     }
 
     public void restartAll() {
-        inPause = false;
         myWorld.inPause = false;
         mysquirrel.xtouchDown = 0;
         mysquirrel.xtouchUp = 0;
@@ -89,7 +83,7 @@ public class InputHandler implements InputProcessor {
 
     public boolean keyPause(int screenX, int screenY) {
 
-        if (!inPause&&(screenX/gameWidthK > widthGEME - 100)&&(screenY/gameWidthK > heightGEME - 100)){
+        if (!myWorld.inPause&&(screenX/gameWidthK > widthGEME - 100)&&(screenY/gameWidthK > heightGEME - 100)){
             return true;
         }
         return false;
@@ -120,13 +114,13 @@ public class InputHandler implements InputProcessor {
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 
 
-            if (inPause){
+            if (myWorld.inPause){
                 inPauseOn(screenX,screenY);
             }
             else if (keyPause( screenX,  screenY)){
                 stopAll();
             }
-            else   if (!inPause) {
+            else   if (!myWorld.inPause) {
                 mysquirrel.xtouchDown = screenX;
             }
 
@@ -138,7 +132,7 @@ public class InputHandler implements InputProcessor {
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 
         if (myWorld.isAlive()) {
-            if (!inPause) {
+            if (!myWorld.inPause) {
                 mysquirrel.xtouchUp = screenX ;
                 mysquirrel.swype();
             }

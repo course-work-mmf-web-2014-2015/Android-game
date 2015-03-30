@@ -73,27 +73,24 @@ public class MenuScreen  implements Screen, InputProcessor {
 
     @Override
     public void resize(int width, int height) {
-
     }
 
     @Override
     public void pause() {
-
     }
 
     @Override
     public void resume() {
-
     }
 
     @Override
     public void hide() {
         Gdx.input.setInputProcessor(null);
+
     }
 
     @Override
     public void dispose() {
-
         Gdx.input.setInputProcessor(null);
 
     }

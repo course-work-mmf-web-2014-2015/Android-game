@@ -5,6 +5,10 @@ import com.bsu.mmf.web.course_work.MainConst;
 import com.bsu.mmf.web.course_work.gameobjects.Acorn;
 import com.bsu.mmf.web.course_work.gameobjects.ScrollHandler;
 import com.bsu.mmf.web.course_work.gameobjects.Squirrel;
+import com.bsu.mmf.web.course_work.helpers.AssetLoader;
+
+import java.util.Collections;
+import java.util.Map;
 
 /**
  * Created by Anton on 06.02.2015.
@@ -19,6 +23,7 @@ public class GameWorld {
 
     private int score = 0;
     private int score2 = 0;
+    private int scoreSum = 0;
 
     public GameWorld() {
         squirrel = new Squirrel(MainConst.POSITIONXSQUIRREL, MainConst.POSITIONYSQUIRREL,
@@ -58,6 +63,22 @@ public class GameWorld {
             scroller.stop();
             squirrel.die();
             isAlive = false;
+
+            scoreSum = score + score2*10 ;
+
+
+            AssetLoader.listScore.add(scoreSum);
+            Collections.sort(AssetLoader.listScore );
+            Collections.reverse(AssetLoader.listScore );
+
+            for (int i = 0; i<5 ; i++){
+                AssetLoader.prefs.putInteger("" + i , AssetLoader.listScore.get(i));
+            }
+            AssetLoader.prefs.flush();
+
+
+           // inPause = true;                                 // добавить sleep
+
         }
 
         if (acorns.collides(squirrel)) {
@@ -113,6 +134,11 @@ public class GameWorld {
         return score2;
     }
 
+    public int getScoreSum() {
+        scoreSum = score + score2*10 ;
+        return scoreSum;
+    }
+
     public void addScore(int increment) {
         score += increment;
     }
@@ -127,6 +153,9 @@ public class GameWorld {
         isAlive = true;
         score = 0;
         score2 = 0;
+        scoreSum = 0;
+        inPause = false;
+
     }
 
 
