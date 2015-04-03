@@ -1,8 +1,5 @@
 package com.bsu.mmf.web.course_work.gameworld;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -58,6 +55,7 @@ public class GameRenderer {
 
     public GameRenderer(GameWorld world) {
         myWorld = world;
+        // задаём камеру
         cam = new OrthographicCamera();
         cam.setToOrtho(true, MainConst.GEMEWIDTH , MainConst.GEMEHEIGHT);
 
@@ -165,7 +163,7 @@ public class GameRenderer {
     }
 
     private void drawBackgroundScroll( ){
-        batcher.disableBlending();
+        batcher.disableBlending(); // без прозрачности грузит быстрее
         batcher.draw(bg, frontBg.getX(), frontBg.getY(),frontBg.getWidth(), frontBg.getHeight());
         batcher.draw(bg, backBg.getX(), backBg.getY(), backBg.getWidth(), backBg.getHeight());
         // нужна прозрачность, поэтому включаем ее
@@ -178,23 +176,21 @@ public class GameRenderer {
         batcher.draw(icicles, icicles3.getX(), icicles3.getY(),widthIcicles, heightIcicles);
         batcher.draw(icicles, icicles4.getX(), icicles4.getY(),widthIcicles, heightIcicles);
 
-
         if (acorns.inScreen()){
             batcher.draw(acorn, acorns.getX(), acorns.getY(),acorn.getRegionWidth(), acorn.getRegionHeight());
         }
     }
 
     private void drawScore(){
-        // Сначала отрисовываем тень
-        shadow.draw(batcher, "" + myWorld.getScore(),  widthGEME - 29 , 6);
-        // Отрисуем сам текст
-        font.draw(batcher, "" + myWorld.getScore(), widthGEME - 30, 6);
 
-        shadow.draw(batcher, "" + myWorld.getScore2(),  widthGEME - 59 - stars.getRegionWidth() , 6);
-        font.draw(batcher, "" + myWorld.getScore2(), widthGEME - 60 - stars.getRegionWidth(), 6);
+        shadow.draw(batcher, "" + myWorld.getScoreSum(),  widthGEME - 29 - 10 , 6);
+        font.draw(batcher, "" + myWorld.getScoreSum(), widthGEME - 30 -10 , 6);
 
-        batcher.draw(stars,widthGEME - 60 , 0 ,stars.getRegionWidth(), stars.getRegionHeight());
-        batcher.draw(acorn, widthGEME - 90 - stars.getRegionWidth(),  2 ,stars.getRegionWidth(), stars.getRegionHeight());
+        shadow.draw(batcher, "" + myWorld.getScore2(),  widthGEME - 59 - stars.getRegionWidth() - 10 , 6);
+        font.draw(batcher, "" + myWorld.getScore2(), widthGEME - 60 - stars.getRegionWidth() - 10 , 6);
+
+        batcher.draw(stars,widthGEME - 60 - 10 , 0 ,stars.getRegionWidth(), stars.getRegionHeight());
+        batcher.draw(acorn, widthGEME - 90 - stars.getRegionWidth() - 10 ,  2 ,stars.getRegionWidth(), stars.getRegionHeight());
 
         batcher.draw(pause, widthGEME - 34 , heightGEME - 40 ,pause.getRegionWidth(), pause.getRegionHeight());
     }
@@ -225,8 +221,8 @@ public class GameRenderer {
                     stars.getRegionWidth(), stars.getRegionHeight());
 
 
-            shadow.draw(batcher, "" + myWorld.getScore(),  120 + 20 + 160 +stars.getRegionWidth() , 200 + bgGameMenu.getRegionHeight() - 50);
-            font.draw(batcher, "" + myWorld.getScore(), 120 + 20 + 160-1 +stars.getRegionWidth(), 200 + bgGameMenu.getRegionHeight() - 50);
+            shadow.draw(batcher, "" + myWorld.getScoreSum(),  120 + 20 + 160 +stars.getRegionWidth() , 200 + bgGameMenu.getRegionHeight() - 50);
+            font.draw(batcher, "" + myWorld.getScoreSum(), 120 + 20 + 160-1 +stars.getRegionWidth(), 200 + bgGameMenu.getRegionHeight() - 50);
             shadow.draw(batcher, "" + myWorld.getScore2(),  120 + 40 +acorn.getRegionWidth(), 200 + bgGameMenu.getRegionHeight() - 50);
             font.draw(batcher, "" + myWorld.getScore2(),  120 + 40-1+acorn.getRegionWidth(), 200 + bgGameMenu.getRegionHeight() - 50);
 

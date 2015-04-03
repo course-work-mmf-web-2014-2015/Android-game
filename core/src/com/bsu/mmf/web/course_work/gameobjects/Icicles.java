@@ -17,7 +17,6 @@ public class Icicles extends Scrollable {
 
     public Icicles(float x, float y, int width, int height, float scrollSpeed) {
         super(x, y, width, height, scrollSpeed);
-        // Иницилизируйте объект типа Random для генерации случайных чисел
         r = new Random();
         boundingRectangle = new Rectangle();
     }

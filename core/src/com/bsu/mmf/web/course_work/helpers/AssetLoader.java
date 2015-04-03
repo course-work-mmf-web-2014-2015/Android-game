@@ -7,10 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.bsu.mmf.web.course_work.MainConst;
-
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Anton on 07.02.2015.
@@ -95,7 +92,7 @@ public class AssetLoader {
         shadow.setScale(.29f, -.29f);
 
 
-        //for menu
+        // menu
 
         textureForMenu = new Texture(Gdx.files.internal("img/menu2.png"));
         textureForMenu.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
@@ -129,22 +126,20 @@ public class AssetLoader {
         buttonGameMenu.flip(false, true);
 
 
+
+        // подгрузка лучшего счёта из файла SqwirrelScoreList в prefs, а оттуда в ArrayList
         prefs = Gdx.app.getPreferences("SqwirrelScoreList");
         listScore =  new ArrayList<Integer>();
-
 
         for (int i = 0; i<5 ; i++){
             listScore.add(prefs.getInteger("" + i));
         }
 
-
-
-
     }
 
     public static void dispose() {
 
-
+        // выгружаем лучший счёт в файл
         for (int i = 0; i<5 ; i++){
             prefs.putInteger("" + i , listScore.get(i));
         }
@@ -153,6 +148,7 @@ public class AssetLoader {
         // Мы должны избавляться от текстур, когда заканчивает работать с объектом в котором есть текстуры
         texture.dispose();
         textureForMenu.dispose();
+        textureForGameMenu.dispose();
         font.dispose();
         shadow.dispose();
     }

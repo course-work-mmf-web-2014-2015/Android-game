@@ -1,6 +1,5 @@
 package com.bsu.mmf.web.course_work.helpers;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.bsu.mmf.web.course_work.MainConst;
@@ -20,6 +19,7 @@ public class InputHandler implements InputProcessor {
     private int heightGEME;
     private float gameWidthK;
 
+
     public InputHandler(GameWorld myWorld , OurGame game) {
         this.game = game;
         this.myWorld = myWorld;
@@ -30,6 +30,9 @@ public class InputHandler implements InputProcessor {
         heightGEME = (int) MainConst.GEMEHEIGHT;
 
         gameWidthK = MainConst.GEMEWIDTHK ;
+
+
+
     }
 
     public void playAll() {
@@ -113,7 +116,6 @@ public class InputHandler implements InputProcessor {
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 
-
             if (myWorld.inPause){
                 inPauseOn(screenX,screenY);
             }
@@ -123,7 +125,6 @@ public class InputHandler implements InputProcessor {
             else   if (!myWorld.inPause) {
                 mysquirrel.xtouchDown = screenX;
             }
-
 
         return true;
     }
@@ -137,7 +138,6 @@ public class InputHandler implements InputProcessor {
                 mysquirrel.swype();
             }
         }
-
 
         return true;
     }

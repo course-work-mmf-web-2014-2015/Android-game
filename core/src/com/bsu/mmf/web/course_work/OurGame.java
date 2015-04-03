@@ -12,20 +12,20 @@ public class OurGame extends Game {
 
     public GameScreen game;
     public MenuScreen menu;
-    public SetLvlScreen setLvl;
+    //public SetLvlScreen setLvl;
 	
 	@Override
 	public void create () {
 
-        AssetLoader.load();
+        AssetLoader.load();  // подгружаем ресурсы
 
-        float gameWidth = MainConst.GEMEWIDTH;
+        float gameWidth = MainConst.GEMEWIDTH;     // просчёт относительных сторон
         float gameHeight = Gdx.graphics.getHeight() / (Gdx.graphics.getWidth() / gameWidth);
         MainConst.GEMEHEIGHT = gameHeight;
 
         game = new GameScreen(this);
         menu = new MenuScreen(this);
-        setLvl = new SetLvlScreen(this);
+        //setLvl = new SetLvlScreen(this);
 
         setScreen(menu);
 

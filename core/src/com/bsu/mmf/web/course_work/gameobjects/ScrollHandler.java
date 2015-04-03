@@ -26,14 +26,13 @@ public class ScrollHandler {
         frontBg = new BackgroundScroll( 0, 0, width, heightBg, scrolSpeed);
         backBg = new BackgroundScroll(0 , frontBg.getTailY(), width, heightBg, scrolSpeed);
 
-        icicles1 = new Icicles(320, 600, widthIcicles, heightIcicles, scrolSpeed);
+        icicles1 = new Icicles(320, 1000, widthIcicles, heightIcicles, scrolSpeed);
         icicles2 = new Icicles(420, icicles1.getTailY() + distansOfIcicles, widthIcicles, heightIcicles, scrolSpeed);
         icicles3 = new Icicles(20, icicles2.getTailY() + distansOfIcicles, widthIcicles, heightIcicles, scrolSpeed);
         icicles4 = new Icicles(220, icicles3.getTailY() + distansOfIcicles, widthIcicles, heightIcicles, scrolSpeed);
     }
 
     public void update(float delta) {
-
         // обновляем все объекты
         frontBg.update(delta);
         backBg.update(delta);
@@ -131,7 +130,7 @@ public class ScrollHandler {
     public void onRestart() {
         frontBg.onRestart(0, scrolSpeed);
         backBg.onRestart(frontBg.getTailY(), scrolSpeed);
-        icicles1.onRestart(600, scrolSpeed);
+        icicles1.onRestart(1000, scrolSpeed);
         icicles2.onRestart(icicles1.getTailY() + distansOfIcicles, scrolSpeed);
         icicles3.onRestart(icicles2.getTailY() + distansOfIcicles, scrolSpeed);
         icicles4.onRestart(icicles3.getTailY() + distansOfIcicles, scrolSpeed);

@@ -79,7 +79,7 @@ public class Squirrel {
     public void swype() {                     //реализация свайпа
 
         if (isAlive) {
-            if (xtouchDown!= 0 && xtouchUp!= 0 && Math.abs(xtouchUp - xtouchDown ) > 70){
+            if (xtouchDown!= 0 && xtouchUp!= 0 && Math.abs(xtouchUp - xtouchDown ) > 50){   // 50 - минимум растояние, чтоб свайп сработал
             if (xtouchUp > xtouchDown){
                 if (positionInBg != 5){
                     velocity.x = tempSwype;
@@ -97,6 +97,28 @@ public class Squirrel {
         }
 
     }
+    public void swypeAccelerom(int x) {
+        if (isAlive) {
+
+            if (x == 1) {
+                if (positionInBg != 5){
+                    velocity.x = tempSwype;
+                    tempX = positionInBg;
+                    positionInBg++;
+                }
+
+            }
+            else if (x == -1) {
+                if (positionInBg != 1){
+                    velocity.x = -tempSwype;
+                    tempX = positionInBg;
+                    positionInBg--;
+                }
+
+            }
+        }
+    }
+
 
     public boolean isAlive() {
         return isAlive;

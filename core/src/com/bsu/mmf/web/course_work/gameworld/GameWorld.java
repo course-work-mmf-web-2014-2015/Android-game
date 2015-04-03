@@ -5,10 +5,9 @@ import com.bsu.mmf.web.course_work.MainConst;
 import com.bsu.mmf.web.course_work.gameobjects.Acorn;
 import com.bsu.mmf.web.course_work.gameobjects.ScrollHandler;
 import com.bsu.mmf.web.course_work.gameobjects.Squirrel;
+import com.bsu.mmf.web.course_work.helpers.AccelerometerHandler;
 import com.bsu.mmf.web.course_work.helpers.AssetLoader;
-
 import java.util.Collections;
-import java.util.Map;
 
 /**
  * Created by Anton on 06.02.2015.
@@ -18,6 +17,7 @@ public class GameWorld {
     private Squirrel squirrel;
     private Acorn acorns;
     private ScrollHandler scroller;
+    private AccelerometerHandler accelerometer ;
     private boolean isAlive = true;
     public boolean inPause = false;
 
@@ -30,6 +30,7 @@ public class GameWorld {
                 MainConst.WIDTHSQUIRREL ,  MainConst.HEIGHTSQUIRREL );
 
         scroller = new ScrollHandler(this);
+        accelerometer = new AccelerometerHandler(squirrel);
 
         acorns = new Acorn(0, 0);
 
@@ -46,6 +47,7 @@ public class GameWorld {
 
         squirrel.update(delta);
         scroller.update(delta);
+        accelerometer.update();
 
         float temp = scroller.getIcicles4().getX() ;
         float posXtemp = temp - scroller.getIcicles4().getWidth()/2 - 15 ;
@@ -84,10 +86,6 @@ public class GameWorld {
         if (acorns.collides(squirrel)) {
             addScore2(1);                                         //добавить один жёлудь к всему
         }
-
-
-
-
 
 
     }

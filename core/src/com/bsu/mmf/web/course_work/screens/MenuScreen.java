@@ -27,6 +27,7 @@ public class MenuScreen  implements Screen, InputProcessor {
     public MenuScreen(OurGame game) {
         this.game = game;
 
+        // задаём камеру
         cam = new OrthographicCamera();
         cam.setToOrtho(true, MainConst.GEMEWIDTH , MainConst.GEMEHEIGHT);
 
@@ -54,6 +55,7 @@ public class MenuScreen  implements Screen, InputProcessor {
     @Override
     public void render(float delta) {
 
+        // рисуем меню
         batcher.begin();
         batcher.disableBlending();
 
