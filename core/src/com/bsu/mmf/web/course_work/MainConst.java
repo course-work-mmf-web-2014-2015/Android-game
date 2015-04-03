@@ -31,6 +31,9 @@ public class MainConst {
 
     public static final float SWYPE = 600;
 
+    public static boolean SOUND = true;
+    public static boolean ACCELEROMETER = true;
+
     public static int SCROLL_SPEED = -600;
 
 

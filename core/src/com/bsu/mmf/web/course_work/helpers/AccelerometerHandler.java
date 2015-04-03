@@ -1,7 +1,9 @@
 package com.bsu.mmf.web.course_work.helpers;
 
 import com.badlogic.gdx.Gdx;
+import com.bsu.mmf.web.course_work.MainConst;
 import com.bsu.mmf.web.course_work.gameobjects.Squirrel;
+import com.bsu.mmf.web.course_work.gameworld.GameWorld;
 
 import sun.rmi.runtime.Log;
 
@@ -11,35 +13,37 @@ import sun.rmi.runtime.Log;
  */
 public class AccelerometerHandler {
 
+    private GameWorld gameWorld;
     private Squirrel squirrel;
-    float accelX ;
-    float accelXTemp,accelXTemp2  ;
+    private float accelX ;
+    private float accelXTemp,accelXTemp2  ;
+    private boolean accelerom ;
 
-    public AccelerometerHandler(Squirrel squirrel) {
-        this.squirrel = squirrel;
+    public AccelerometerHandler(GameWorld gameWorld) {
+        this.gameWorld = gameWorld;
+        squirrel = gameWorld.getSquirrel();
         accelX = 3;
         accelXTemp2 = 3;
         accelXTemp = 3;
+        accelerom =  MainConst.ACCELEROMETER;
     }
 
     public void update() {
 
-        accelXTemp = accelX;
-        accelX = Gdx.input.getAccelerometerX();
+        if (!gameWorld.inPause && MainConst.ACCELEROMETER) {
+            accelXTemp = accelX;
+            accelX = Gdx.input.getAccelerometerX();
 
-        if (Math.abs(accelX - accelXTemp ) < 1) accelX = accelXTemp;
-
-
-         if (accelX > 4 && accelXTemp < 4  && accelXTemp > -4) {
-             squirrel.swypeAccelerom(-1);
-         }
-
-        else
-             if (accelX < -4  && accelXTemp > -4  && accelXTemp < 4) {
-                  squirrel.swypeAccelerom(1);
-             }
+            if (Math.abs(accelX - accelXTemp) < 1) accelX = accelXTemp;
 
 
+            if (accelX > 4 && accelXTemp < 4 && accelXTemp > -4) {
+                squirrel.swypeAccelerom(-1);
+            } else if (accelX < -4 && accelXTemp > -4 && accelXTemp < 4) {
+                squirrel.swypeAccelerom(1);
+            }
+
+        }
     }
 
 

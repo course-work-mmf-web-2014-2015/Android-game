@@ -2,6 +2,7 @@ package com.bsu.mmf.web.course_work.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.bsu.mmf.web.course_work.MainConst;
 import com.bsu.mmf.web.course_work.OurGame;
 import com.bsu.mmf.web.course_work.gameworld.GameRenderer;
 import com.bsu.mmf.web.course_work.gameworld.GameWorld;
@@ -26,7 +27,6 @@ public class GameScreen implements Screen {
     public GameScreen(OurGame game) {
 
         this.game = game;
-
         world = new GameWorld();
         renderer = new GameRenderer(world);
 

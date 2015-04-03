@@ -30,9 +30,9 @@ public class GameWorld {
                 MainConst.WIDTHSQUIRREL ,  MainConst.HEIGHTSQUIRREL );
 
         scroller = new ScrollHandler(this);
-        accelerometer = new AccelerometerHandler(squirrel);
-
         acorns = new Acorn(0, 0);
+
+        accelerometer = new AccelerometerHandler(this);
 
     }
 
@@ -43,7 +43,6 @@ public class GameWorld {
         if (delta > .15f) {
             delta = .15f;
         }
-
 
         squirrel.update(delta);
         scroller.update(delta);
