@@ -2,6 +2,7 @@ package com.bsu.mmf.web.course_work.screens;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -23,7 +24,8 @@ public class MenuScreen  implements Screen, InputProcessor {
     private boolean downBtn;
     private boolean downSound;
     private boolean downAccelerom;
-    private TextureRegion bgMenu, button1, button2;
+    private boolean downExit;
+    private TextureRegion bgMenu;
     public static BitmapFont font, shadow;
 
     private float gameWidthK;
@@ -39,14 +41,13 @@ public class MenuScreen  implements Screen, InputProcessor {
         batcher.setProjectionMatrix(cam.combined);
 
         bgMenu = AssetLoader.bgMenu;
-        button1 = AssetLoader.button1;
-        button2 = AssetLoader.button2;
         font = AssetLoader.font;
         shadow = AssetLoader.shadow;
 
         downBtn = false;
         downSound = true;
         downAccelerom = true;
+        downExit = false;
 
         gameWidthK = Gdx.graphics.getWidth() /  MainConst.GEMEWIDTH ;
         MainConst.GEMEWIDTHK = gameWidthK;
@@ -70,12 +71,20 @@ public class MenuScreen  implements Screen, InputProcessor {
         shadow.setScale(.35f, -.35f);
         font.setScale(.35f, -.35f);
 
-        shadow.draw(batcher, "sound",  MainConst.GEMEWIDTH/2 - 40 , MainConst.GEMEHEIGHT/2 + button1.getRegionHeight() + 50);
+        shadow.draw(batcher, "sound",  MainConst.GEMEWIDTH/2 - 40 , MainConst.GEMEHEIGHT/2 + 140 + 50);
         if (downSound)
-        font.draw(batcher, "sound",  MainConst.GEMEWIDTH/2 - 40-1 , MainConst.GEMEHEIGHT/2 + button1.getRegionHeight() + 50);
-        shadow.draw(batcher, "accelerometer" , MainConst.GEMEWIDTH/2 - 90  , MainConst.GEMEHEIGHT/2 +button1.getRegionHeight() + 110);
+        font.draw(batcher, "sound",  MainConst.GEMEWIDTH/2 - 40-1 , MainConst.GEMEHEIGHT/2 + 140 + 50);
+        shadow.draw(batcher, "accelerometer" , MainConst.GEMEWIDTH/2 - 90  , MainConst.GEMEHEIGHT/2 +140 + 110);
         if (downAccelerom)
-        font.draw(batcher, "accelerometer" , MainConst.GEMEWIDTH/2 - 90-1 , MainConst.GEMEHEIGHT/2 +button1.getRegionHeight() + 110);
+        font.draw(batcher, "accelerometer" , MainConst.GEMEWIDTH/2 - 90-1 , MainConst.GEMEHEIGHT/2 +140 + 110);
+
+        if (downExit){
+            shadow.draw(batcher, "exit",  MainConst.GEMEWIDTH/2 - 30-1  , MainConst.GEMEHEIGHT/2 + 140 + 170);
+        }
+        else{
+            shadow.draw(batcher, "exit",  MainConst.GEMEWIDTH/2 - 30-1  , MainConst.GEMEHEIGHT/2 + 140 + 170);
+            font.draw(batcher, "exit",  MainConst.GEMEWIDTH/2 - 30  , MainConst.GEMEHEIGHT/2 + 140 + 170);
+        }
 
         shadow.setScale(.20f, -.20f);
         font.setScale(.20f, -.20f);
@@ -90,15 +99,10 @@ public class MenuScreen  implements Screen, InputProcessor {
         if (downBtn){
             shadow.draw(batcher, "Start",  MainConst.GEMEWIDTH/2 - 50 , MainConst.GEMEHEIGHT/2 + 50);
         }
-            // batcher.draw(button2,  MainConst.GEMEWIDTH/2 - button2.getRegionWidth()/2,  MainConst.GEMEHEIGHT/2 ,
-            //         button2.getRegionWidth(), button2.getRegionHeight());
-
         else{
             shadow.draw(batcher, "Start",  MainConst.GEMEWIDTH/2 - 50 , MainConst.GEMEHEIGHT/2 + 50);
             font.draw(batcher, "Start",  MainConst.GEMEWIDTH/2 - 50-1 , MainConst.GEMEHEIGHT /2 + 50);
         }
-           // batcher.draw(button1,  MainConst.GEMEWIDTH/2 - button1.getRegionWidth()/2,  MainConst.GEMEHEIGHT/2 ,
-           //         button1.getRegionWidth(), button1.getRegionHeight());
 
         shadow.setScale(.29f, -.29f);
         font.setScale(.29f, -.29f);
@@ -145,25 +149,31 @@ public class MenuScreen  implements Screen, InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        if ((screenX/ gameWidthK > MainConst.GEMEWIDTH / 2 - button1.getRegionWidth()/2 )&&
-                (screenX/ gameWidthK < MainConst.GEMEWIDTH / 2 + button1.getRegionWidth()/2 ))
+        if ((screenX/ gameWidthK > MainConst.GEMEWIDTH / 2 - 140/2 )&&
+                (screenX/ gameWidthK < MainConst.GEMEWIDTH / 2 + 140/2 ))
             if ((screenY / gameWidthK > MainConst.GEMEHEIGHT/2 )&&
-                    (screenY / gameWidthK < MainConst.GEMEHEIGHT/2 + button1.getRegionHeight()))
+                    (screenY / gameWidthK < MainConst.GEMEHEIGHT/2 + 140))
                   downBtn = true;
 
         if ((screenX/ gameWidthK > MainConst.GEMEWIDTH/2 - 50 )&&
                 (screenX/ gameWidthK < MainConst.GEMEWIDTH/2 + 50 ))
-            if ((screenY / gameWidthK > MainConst.GEMEHEIGHT/2 + button1.getRegionHeight() + 50 - 5 )&&
-                    (screenY / gameWidthK < MainConst.GEMEHEIGHT/2 + button1.getRegionHeight() + 50 + 25))
+            if ((screenY / gameWidthK > MainConst.GEMEHEIGHT/2 + 140 + 50 - 5 )&&
+                    (screenY / gameWidthK < MainConst.GEMEHEIGHT/2 + 140 + 50 + 25))
                 if (downSound) downSound = false;
                 else downSound = true;
 
         if ((screenX/ gameWidthK > MainConst.GEMEWIDTH/2 - 100 )&&
                 (screenX/ gameWidthK < MainConst.GEMEWIDTH/2 + 100 ))
-            if ((screenY / gameWidthK > MainConst.GEMEHEIGHT/2 +button1.getRegionHeight() + 110 - 5 )&&
-                    (screenY / gameWidthK < MainConst.GEMEHEIGHT/2 +button1.getRegionHeight() + 110 + 25))
+            if ((screenY / gameWidthK > MainConst.GEMEHEIGHT/2 + 140 + 110 - 5 )&&
+                    (screenY / gameWidthK < MainConst.GEMEHEIGHT/2 + 140 + 110 + 25))
                 if (downAccelerom) downAccelerom = false;
                 else downAccelerom = true;
+
+        if ((screenX/ gameWidthK > MainConst.GEMEWIDTH/2 - 40 )&&
+                (screenX/ gameWidthK < MainConst.GEMEWIDTH/2 + 40 ))
+            if ((screenY / gameWidthK > MainConst.GEMEHEIGHT/2 + 140+ 170 - 5 )&&
+                    (screenY / gameWidthK < MainConst.GEMEHEIGHT/2 + 140 + 170 + 25))
+                      downExit = true;
 
         return true;
     }
@@ -181,6 +191,10 @@ public class MenuScreen  implements Screen, InputProcessor {
             game.setScreen(game.game);
         }
 
+        if(downExit){
+            Gdx.app.exit();
+            dispose();
+        }
 
         return true;
     }
