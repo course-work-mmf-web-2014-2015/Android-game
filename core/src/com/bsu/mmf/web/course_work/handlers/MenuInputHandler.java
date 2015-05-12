@@ -1,4 +1,4 @@
-package com.bsu.mmf.web.course_work.helpers;
+package com.bsu.mmf.web.course_work.handlers;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;

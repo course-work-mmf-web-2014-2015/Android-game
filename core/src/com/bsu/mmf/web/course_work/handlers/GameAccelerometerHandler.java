@@ -1,4 +1,4 @@
-package com.bsu.mmf.web.course_work.helpers;
+package com.bsu.mmf.web.course_work.handlers;
 
 import com.badlogic.gdx.Gdx;
 import com.bsu.mmf.web.course_work.Constants;
@@ -9,7 +9,7 @@ import com.bsu.mmf.web.course_work.gameworld.GameWorld;
 /**
  * Created by Anton on 02.04.2015.
  */
-public class AccelerometerHandler {
+public class GameAccelerometerHandler {
 
     private GameWorld gameWorld;
     private Squirrel squirrel;
@@ -17,7 +17,7 @@ public class AccelerometerHandler {
     private float accelXTemp,accelXTemp2  ;
     private boolean accelerom ;
 
-    public AccelerometerHandler(GameWorld gameWorld) {
+    public GameAccelerometerHandler(GameWorld gameWorld) {
         this.gameWorld = gameWorld;
         squirrel = gameWorld.getSquirrel();
         accelX = 3;

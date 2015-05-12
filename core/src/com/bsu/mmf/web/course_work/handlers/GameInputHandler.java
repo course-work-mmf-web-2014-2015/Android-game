@@ -1,4 +1,4 @@
-package com.bsu.mmf.web.course_work.helpers;
+package com.bsu.mmf.web.course_work.handlers;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;

@@ -5,8 +5,9 @@ import com.bsu.mmf.web.course_work.Constants;
 import com.bsu.mmf.web.course_work.gameobjects.Acorn;
 import com.bsu.mmf.web.course_work.gameobjects.ScrollHandler;
 import com.bsu.mmf.web.course_work.gameobjects.Squirrel;
-import com.bsu.mmf.web.course_work.helpers.AccelerometerHandler;
+import com.bsu.mmf.web.course_work.handlers.GameAccelerometerHandler;
 import com.bsu.mmf.web.course_work.helpers.AssetLoader;
+
 import java.util.Collections;
 
 /**
@@ -17,7 +18,7 @@ public class GameWorld {
     private Squirrel squirrel;
     private Acorn acorns;
     private ScrollHandler scroller;
-    private AccelerometerHandler accelerometer ;
+    private GameAccelerometerHandler accelerometer ;
     private boolean isAlive = true;
     public boolean inPause = false;
 
@@ -32,7 +33,7 @@ public class GameWorld {
         scroller = new ScrollHandler(this);
         acorns = new Acorn(0, 0);
 
-        accelerometer = new AccelerometerHandler(this);
+        accelerometer = new GameAccelerometerHandler(this);
 
     }
 

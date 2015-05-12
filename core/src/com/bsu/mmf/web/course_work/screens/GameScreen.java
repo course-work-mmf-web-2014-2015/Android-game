@@ -6,7 +6,7 @@ import com.bsu.mmf.web.course_work.Constants;
 import com.bsu.mmf.web.course_work.OurGame;
 import com.bsu.mmf.web.course_work.gameworld.GameRenderer;
 import com.bsu.mmf.web.course_work.gameworld.GameWorld;
-import com.bsu.mmf.web.course_work.helpers.GameInputHandler;
+import com.bsu.mmf.web.course_work.handlers.GameInputHandler;
 
 /**
  * Created by Anton on 06.02.2015.

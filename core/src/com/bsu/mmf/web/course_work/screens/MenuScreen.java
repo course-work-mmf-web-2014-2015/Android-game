@@ -1,13 +1,12 @@
 package com.bsu.mmf.web.course_work.screens;
 
-import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.bsu.mmf.web.course_work.Constants;
 import com.bsu.mmf.web.course_work.OurGame;
 import com.bsu.mmf.web.course_work.gameworld.MenuRenderer;
 import com.bsu.mmf.web.course_work.gameworld.MenuWorld;
-import com.bsu.mmf.web.course_work.helpers.MenuInputHandler;
+import com.bsu.mmf.web.course_work.handlers.MenuInputHandler;
 
 /**
  * Created by Anton on 12.02.2015.
