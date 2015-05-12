@@ -34,13 +34,9 @@ public class GameWorld {
         acorns = new Acorn(0, 0);
 
         accelerometer = new GameAccelerometerHandler(this);
-
     }
 
     public void update(float delta) {
-        // Добавим лимит для нашей delta, так что если игра начнет тормозить
-        // при обновлении, мы не нарушим нашу логику определения колизии
-
         if (delta > .15f) {
             delta = .15f;
         }
@@ -57,7 +53,7 @@ public class GameWorld {
 
         }
 
-        acorns.setPosition( posXtemp  , scroller.getIcicles4().getY() - 150);
+        acorns.setPosition(posXtemp  , scroller.getIcicles4().getY() - 150);
 
 
         if (isAlive && scroller.collides(squirrel)) {
@@ -70,8 +66,8 @@ public class GameWorld {
 
 
             AssetLoader.listScore.add(scoreSum);
-            Collections.sort(AssetLoader.listScore );
-            Collections.reverse(AssetLoader.listScore );
+            Collections.sort(AssetLoader.listScore);
+            Collections.reverse(AssetLoader.listScore);
 
             for (int i = 0; i<5 ; i++){
                 AssetLoader.prefs.putInteger("" + i , AssetLoader.listScore.get(i));
@@ -79,49 +75,36 @@ public class GameWorld {
             AssetLoader.prefs.flush();
 
 
-           // inPause = true;                                 // добавить sleep
-
+            inPause = true; // TODO: добавить sleep
         }
 
         if (acorns.collides(squirrel)) {
-            addScore2(1);                                         //добавить один жёлудь к всему
+            addScore2(1);
         }
-
-
     }
 
     public Squirrel getSquirrel() {
-
         return squirrel;
-
     }
 
     public ScrollHandler getScrollHandler() {
-
         return scroller;
-
     }
 
     public Acorn getAcorn() {
-
         return acorns;
-
     }
 
     public boolean isAlive() {
-
         return isAlive;
     }
 
     public boolean isPause() {
-
         return inPause;
     }
 
     public ScrollHandler getScroller() {
-
         return scroller;
-
     }
 
     public int getScore() {
@@ -153,9 +136,5 @@ public class GameWorld {
         score2 = 0;
         scoreSum = 0;
         inPause = false;
-
     }
-
-
-
 }

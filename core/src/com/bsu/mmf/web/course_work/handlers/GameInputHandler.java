@@ -30,9 +30,6 @@ public class GameInputHandler implements InputProcessor {
         this.gameHeight = (int) gameHeight;
 
         this.gameWidthCoefficient = gameWidthCoefficient;
-
-
-
     }
 
     public void playAll() {
@@ -66,44 +63,36 @@ public class GameInputHandler implements InputProcessor {
 
     public void inPauseOn(int screenX, int screenY) {
         if ((screenX/ gameWidthCoefficient > gameWidth /2 - 100)&&(screenX/ gameWidthCoefficient < gameWidth /2 + 100)
-                &&(screenY/ gameWidthCoefficient > gameHeight /2 - 200)&&(screenY/ gameWidthCoefficient < gameHeight /2-100 )){
+                && (screenY/ gameWidthCoefficient > gameHeight /2 - 200)&&(screenY/ gameWidthCoefficient < gameHeight /2-100 )) {
             if (myWorld.isAlive()) {
                 playAll();
             }
-
         }
 
         if ((screenX/ gameWidthCoefficient > gameWidth /2 - 100-138)&&(screenX/ gameWidthCoefficient < gameWidth /2 + 100-138)
-                &&(screenY/ gameWidthCoefficient > gameHeight /2 - 200)&&(screenY/ gameWidthCoefficient < gameHeight /2-100 )){
+                && (screenY/ gameWidthCoefficient > gameHeight /2 - 200)&&(screenY/ gameWidthCoefficient < gameHeight /2-100 )) {
             backAll();
         }
 
         if ((screenX/ gameWidthCoefficient > gameWidth /2 - 100+138)&&(screenX/ gameWidthCoefficient < gameWidth /2 + 100+138)
-                &&(screenY/ gameWidthCoefficient > gameHeight /2 - 200)&&(screenY/ gameWidthCoefficient < gameHeight /2-100 )){
+                && (screenY/ gameWidthCoefficient > gameHeight /2 - 200)&&(screenY/ gameWidthCoefficient < gameHeight /2-100 )) {
             restartAll();
         }
     }
 
     public boolean keyPause(int screenX, int screenY) {
-
-        if (!myWorld.inPause && (screenX/gameWidthCoefficient > gameWidth - 100) && (screenY/gameWidthCoefficient > gameHeight - 100)){
-            return true;
-        }
-        return false;
-
+        return !myWorld.inPause && (screenX / gameWidthCoefficient > gameWidth - 100) && (screenY / gameWidthCoefficient > gameHeight - 100);
     }
 
     @Override
     public boolean keyDown(int keycode) {
         return true;
-
     }
 
     @Override
     public boolean keyUp(int keycode) {
         if(keycode == Input.Keys.BACK ){
             stopAll();
-
         }
         return true;
     }
@@ -115,14 +104,13 @@ public class GameInputHandler implements InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-
-            if (myWorld.inPause){
+            if (myWorld.inPause) {
                 inPauseOn(screenX,screenY);
             }
-            else if (keyPause( screenX,  screenY)){
+            else if (keyPause(screenX,  screenY)) {
                 stopAll();
             }
-            else   if (!myWorld.inPause) {
+            else if (!myWorld.inPause) {
                 mysquirrel.xtouchDown = screenX;
             }
 
@@ -131,7 +119,6 @@ public class GameInputHandler implements InputProcessor {
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-
         if (myWorld.isAlive()) {
             if (!myWorld.inPause) {
                 mysquirrel.xtouchUp = screenX ;
