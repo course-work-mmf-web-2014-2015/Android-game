@@ -2,33 +2,30 @@ package com.bsu.mmf.web.course_work.gameobjects;
 
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Intersector;
-import com.bsu.mmf.web.course_work.MainConst;
+import com.badlogic.gdx.math.Vector2;
 
 /**
  * Created by Anton on 16.02.2015.
  */
+
 public class Acorn {
+    private static final float CIRCLE_RADIUS_ACORN = 20;
+    private static final float WIDTH_ACORN  = 40;
+    private static final float HEIGHT_ACORN  = 40;
 
-    private float positionX;
-    private float positionY;
+    private Vector2 position;
 
-    private Circle acornCircle;
-    private float circleRadius = MainConst.CIRCLERADIUSACORN;
-
-    private float width = MainConst.WIDTHACORN;
-    private float height = MainConst.HEIGHTACORN;
+    private Circle acornBoundingCircle;
 
     private boolean inScreen = true;
 
     public Acorn(float x, float y) {
-        positionX = x;
-        positionY = y;
+        position = new Vector2(x, y);
 
-        acornCircle = new Circle();
-        acornCircle.set(positionX + circleRadius+4, positionY + circleRadius+4 , circleRadius);
+        acornBoundingCircle = new Circle();
+        acornBoundingCircle.set(position.x + CIRCLE_RADIUS_ACORN + 4, position.y + CIRCLE_RADIUS_ACORN + 4, CIRCLE_RADIUS_ACORN);
 
     }
-
 
     public boolean inScreen() {
         return inScreen;
@@ -36,8 +33,8 @@ public class Acorn {
     }
 
     public boolean collides(Squirrel squirrel) {                              // проверка на пересечение
-        if ( positionY < squirrel.getY() + squirrel.getHeight()) {
-            if (inScreen && Intersector.overlaps(squirrel.getBoundingCircle(), acornCircle)){
+        if ( position.y < squirrel.getY() + squirrel.getHeight()) {
+            if (inScreen && Intersector.overlaps(squirrel.getBoundingCircle(), acornBoundingCircle)){
                 inScreen = false;
                 return true;
             }
@@ -54,30 +51,28 @@ public class Acorn {
     }
 
     public void setPosition(float x, float y) {
-        positionX = x;
-        positionY = y;
-        acornCircle.set(positionX + circleRadius+2, positionY + circleRadius+2 , circleRadius);
+        position.x = x;
+        position.y = y;
+        acornBoundingCircle.set(position.x + CIRCLE_RADIUS_ACORN + 2, position.y + CIRCLE_RADIUS_ACORN + 2, CIRCLE_RADIUS_ACORN);
     }
 
     public float getX() {
-        return positionX;
+        return position.x;
     }
 
     public float getY() {
-        return positionY;
+        return position.y;
     }
 
     public float getWidth() {
-        return width;
+        return WIDTH_ACORN;
     }
 
     public float getHeight() {
-        return height;
+        return HEIGHT_ACORN;
     }
 
     public Circle getBoundingCircle() {
-        return acornCircle;
+        return acornBoundingCircle;
     }
-
-
 }

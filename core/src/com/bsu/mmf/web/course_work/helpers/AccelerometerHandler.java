@@ -1,11 +1,9 @@
 package com.bsu.mmf.web.course_work.helpers;
 
 import com.badlogic.gdx.Gdx;
-import com.bsu.mmf.web.course_work.MainConst;
+import com.bsu.mmf.web.course_work.Constants;
 import com.bsu.mmf.web.course_work.gameobjects.Squirrel;
 import com.bsu.mmf.web.course_work.gameworld.GameWorld;
-
-import sun.rmi.runtime.Log;
 
 
 /**
@@ -25,12 +23,12 @@ public class AccelerometerHandler {
         accelX = 3;
         accelXTemp2 = 3;
         accelXTemp = 3;
-        accelerom =  MainConst.ACCELEROMETER;
+        accelerom =  Constants.ACCELEROMETER;
     }
 
     public void update() {
 
-        if (!gameWorld.inPause && MainConst.ACCELEROMETER) {
+        if (!gameWorld.inPause && Constants.ACCELEROMETER) {
             accelXTemp = accelX;
             accelX = Gdx.input.getAccelerometerX();
 

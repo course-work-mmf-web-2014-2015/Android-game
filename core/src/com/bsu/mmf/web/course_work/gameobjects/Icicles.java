@@ -2,7 +2,7 @@ package com.bsu.mmf.web.course_work.gameobjects;
 
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
-import com.bsu.mmf.web.course_work.MainConst;
+import com.bsu.mmf.web.course_work.Constants;
 
 import java.util.Random;
 
@@ -12,7 +12,7 @@ import java.util.Random;
 public class Icicles extends Scrollable {
 
     private Random r;
-    private static float posSq = MainConst.POSITIONXSQUIRREL;
+    private static float posSq = Constants.POSITION_X_SQUIRREL;
     private Rectangle boundingRectangle;
 
     public Icicles(float x, float y, int width, int height, float scrollSpeed) {

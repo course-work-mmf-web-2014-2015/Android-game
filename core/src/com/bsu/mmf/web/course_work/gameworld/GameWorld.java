@@ -1,7 +1,7 @@
 package com.bsu.mmf.web.course_work.gameworld;
 
 
-import com.bsu.mmf.web.course_work.MainConst;
+import com.bsu.mmf.web.course_work.Constants;
 import com.bsu.mmf.web.course_work.gameobjects.Acorn;
 import com.bsu.mmf.web.course_work.gameobjects.ScrollHandler;
 import com.bsu.mmf.web.course_work.gameobjects.Squirrel;
@@ -26,8 +26,8 @@ public class GameWorld {
     private int scoreSum = 0;
 
     public GameWorld() {
-        squirrel = new Squirrel(MainConst.POSITIONXSQUIRREL, MainConst.POSITIONYSQUIRREL,
-                MainConst.WIDTHSQUIRREL ,  MainConst.HEIGHTSQUIRREL );
+        squirrel = new Squirrel(Constants.POSITION_X_SQUIRREL, Constants.POSITION_Y_SQUIRREL,
+                Constants.WIDTH_SQUIRREL,  Constants.HEIGHT_SQUIRREL);
 
         scroller = new ScrollHandler(this);
         acorns = new Acorn(0, 0);

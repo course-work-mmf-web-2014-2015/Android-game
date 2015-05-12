@@ -2,7 +2,7 @@ package com.bsu.mmf.web.course_work.gameobjects;
 
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
-import com.bsu.mmf.web.course_work.MainConst;
+import com.bsu.mmf.web.course_work.Constants;
 
 /**
  * Created by Anton on 06.02.2015.
@@ -16,9 +16,9 @@ public class Squirrel {
 
     private float width;           //ширина
     private float height;          //высота белки
-    private float circleRadius = MainConst.CIRCLERADIUSSQUIRREL;
+    private float circleRadius = Constants.CIRCLE_RADIUS_SQUIRREL;
     private int tempX ;
-    private float tempSwype = MainConst.SWYPE ;
+    private float tempSwype = Constants.SWYPE ;
 
     private boolean isAlive;
 
@@ -41,7 +41,7 @@ public class Squirrel {
         isAlive = true;
 
         positionInBgMassX = new float[6];
-        positionInBgMassX[3] = MainConst.POSITIONXSQUIRREL ;
+        positionInBgMassX[3] = Constants.POSITION_X_SQUIRREL;
         positionInBgMassX[2] = positionInBgMassX[3] - 100 ;
         positionInBgMassX[1] = positionInBgMassX[2] - 100 ;
         positionInBgMassX[4] = positionInBgMassX[3] + 100 ;
@@ -151,8 +151,8 @@ public class Squirrel {
     }
 
     public void onRestart() {
-        position.y = MainConst.POSITIONYSQUIRREL;
-        position.x = MainConst.POSITIONXSQUIRREL;
+        position.y = Constants.POSITION_Y_SQUIRREL;
+        position.x = Constants.POSITION_X_SQUIRREL;
         velocity.x = 0;
         isAlive = true;
         positionInBg = 3;

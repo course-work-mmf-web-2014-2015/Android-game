@@ -6,11 +6,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.bsu.mmf.web.course_work.MainConst;
+import com.bsu.mmf.web.course_work.Constants;
 import java.util.ArrayList;
 
 /**
  * Created by Anton on 07.02.2015.
+ * Класс для загрузки и доступа к различным ресурсам
  */
 public class AssetLoader {
 
@@ -78,11 +79,11 @@ public class AssetLoader {
 
 
         TextureRegion[] squirrels = { squirrel1, squirrel2, squirrel3 };
-        squirrelAnimation = new Animation(MainConst.ANIMATIONSQUIRREL, squirrels);
+        squirrelAnimation = new Animation(Constants.ANIMATION_SQUIRREL, squirrels);
         squirrelAnimation.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
 
         TextureRegion[] ice = { ice1, ice2 };
-        iceAnimation = new Animation(MainConst.ANIMATIONSQUIRREL, ice);
+        iceAnimation = new Animation(Constants.ANIMATION_SQUIRREL, ice);
         iceAnimation.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
 
 
@@ -109,7 +110,7 @@ public class AssetLoader {
         buttonHome =  new TextureRegion(textureForMenu, 800, 150, 100, 100);
         buttonHome.flip(false, true);
 
-        buttonRest =  new TextureRegion(textureForMenu, 600, 150, 100, 78);
+        buttonRest =  new TextureRegion(textureForMenu, 600, 150, 100, 100);
         buttonRest.flip(false, true);
 
 

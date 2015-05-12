@@ -2,40 +2,42 @@ package com.bsu.mmf.web.course_work.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.bsu.mmf.web.course_work.MainConst;
+import com.bsu.mmf.web.course_work.Constants;
 import com.bsu.mmf.web.course_work.OurGame;
 import com.bsu.mmf.web.course_work.gameworld.GameRenderer;
 import com.bsu.mmf.web.course_work.gameworld.GameWorld;
-import com.bsu.mmf.web.course_work.helpers.InputHandler;
+import com.bsu.mmf.web.course_work.helpers.GameInputHandler;
 
 /**
  * Created by Anton on 06.02.2015.
- * В нашем GameScreen, мы делегируем обновление и отрисовку нашим классам GameWorld и GameRenderer, соответственно.
- *
- Во время создания GameScreen, мы должны создать два новых объекта типа GameWorld и GameRenderer.
- Внутри render метода класса GameScreen, мы должны запросить выполнить обновление и отрисовку у классов GameWorld и GameRenderer соответственно.
- *
+ * В GameScreen делегируем обновление и отрисовку классам GameWorld и GameRenderer
  */
 public class GameScreen implements Screen {
 
     private OurGame game;
-
     public GameWorld world;
     private GameRenderer renderer;
+
+    private float gameWidth;
+    private float gameHeight;
+    private float gameWidthCoefficient;
+
     private float runTime = 0;
 
     public GameScreen(OurGame game) {
+        gameWidth = Constants.GAME_WIDTH;     // просчёт относительных сторон
+        gameHeight = Gdx.graphics.getHeight() / (Gdx.graphics.getWidth() / gameWidth);
+        gameWidthCoefficient = Gdx.graphics.getWidth() /  Constants.GAME_WIDTH ;
 
         this.game = game;
-        world = new GameWorld();
-        renderer = new GameRenderer(world);
-
+        this.world = new GameWorld();
+        this.renderer = new GameRenderer(world, (int) gameHeight);
     }
 
 
     @Override
     public void show() {
-        Gdx.input.setInputProcessor(new InputHandler(world,game ));
+        Gdx.input.setInputProcessor(new GameInputHandler(world, game, gameHeight, gameWidthCoefficient));
         Gdx.input.setCatchBackKey(true);
     }
 
@@ -69,7 +71,6 @@ public class GameScreen implements Screen {
 
     @Override
     public void dispose() {
-        Gdx.input.setInputProcessor(null);
-        Gdx.input.setCatchBackKey(false);
+        hide();
     }
 }

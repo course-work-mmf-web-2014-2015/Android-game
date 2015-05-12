@@ -1,6 +1,6 @@
 package com.bsu.mmf.web.course_work.gameobjects;
 
-import com.bsu.mmf.web.course_work.MainConst;
+import com.bsu.mmf.web.course_work.Constants;
 import com.bsu.mmf.web.course_work.gameworld.GameWorld;
 
 /**
@@ -16,12 +16,12 @@ public class ScrollHandler {
 
     public ScrollHandler(GameWorld gameWorld) {
         this.gameWorld = gameWorld;
-        scrolSpeed = MainConst.SCROLL_SPEED;
-        int width = (int) MainConst.GEMEWIDTH;
-        int heightBg = (int) MainConst.HEIGHTBACKGROUND;
-        distansOfIcicles = (int) MainConst.DISTANCEICICLES ;
-        int widthIcicles = (int) MainConst.WIDTHICICLES;
-        int heightIcicles = (int) MainConst.HEIGHTICICLES;
+        scrolSpeed = Constants.SCROLL_SPEED;
+        int width = (int) Constants.GAME_WIDTH;
+        int heightBg = (int) Constants.HEIGHT_BACKGROUND;
+        distansOfIcicles = (int) Constants.DISTANCE_ICICLES;
+        int widthIcicles = (int) Constants.WIDTH_ICICLES;
+        int heightIcicles = (int) Constants.HEIGHT_ICICLES;
 
         frontBg = new BackgroundScroll( 0, 0, width, heightBg, scrolSpeed);
         backBg = new BackgroundScroll(0 , frontBg.getTailY(), width, heightBg, scrolSpeed);
