@@ -50,7 +50,7 @@ public class AssetLoader {
 
     public static void load() {
 
-        acornSound = Gdx.audio.newSound(Gdx.files.internal("sound/addAcornSound.wav"));
+        acornSound = Gdx.audio.newSound(Gdx.files.internal("sound/addAcornSound.mp3"));
         crashSound = Gdx.audio.newSound(Gdx.files.internal("sound/crashSound.mp3"));
         mp3Music = Gdx.audio.newMusic(Gdx.files.internal("sound/mainSound.mp3"));
 
