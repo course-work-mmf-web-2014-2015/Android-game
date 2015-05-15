@@ -2,6 +2,8 @@ package com.bsu.mmf.web.course_work.helpers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -37,12 +39,20 @@ public class AssetLoader {
 
     public static Texture textureForGameMenu;
     public static TextureRegion bgGameMenu;
-    public static TextureRegion buttonGameMenu;
+    public static TextureRegion buttonGameMenu, buttonGameMenu2;
 
     public static Preferences prefs;             // переменная сохранения счёта в файл
     public static ArrayList<Integer> listScore;
 
+    public static Sound crashSound,acornSound;
+    public static Music mp3Music;
+
+
     public static void load() {
+
+        acornSound = Gdx.audio.newSound(Gdx.files.internal("sound/addAcornSound.wav"));
+        crashSound = Gdx.audio.newSound(Gdx.files.internal("sound/crashSound.mp3"));
+        mp3Music = Gdx.audio.newMusic(Gdx.files.internal("sound/mainSound.mp3"));
 
         texture = new Texture(Gdx.files.internal("img/ice-wallpaper2.png"));
         texture.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
@@ -126,6 +136,9 @@ public class AssetLoader {
         buttonGameMenu = new TextureRegion(textureForMenu, 600, 0, 138, 136);
         buttonGameMenu.flip(false, true);
 
+        buttonGameMenu2 = new TextureRegion(textureForMenu, 800, 0, 138, 136);
+        buttonGameMenu2.flip(false, true);
+
 
 
         // подгрузка лучшего счёта из файла SqwirrelScoreList в prefs, а оттуда в ArrayList
@@ -152,6 +165,10 @@ public class AssetLoader {
         textureForGameMenu.dispose();
         font.dispose();
         shadow.dispose();
+
+        crashSound.dispose();
+        mp3Music.dispose();
+        acornSound.dispose();
     }
 
 }

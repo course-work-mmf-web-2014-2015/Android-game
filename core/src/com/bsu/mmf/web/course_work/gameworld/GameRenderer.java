@@ -42,7 +42,7 @@ public class GameRenderer {
     private TextureRegion squirrelBum;
     private TextureRegion acorn;
     private TextureRegion bgGameMenu;
-    private TextureRegion buttonGameMenu;
+    private TextureRegion buttonGameMenu,buttonGameMenu2;
     private TextureRegion buttonHome, buttonRest;
 
     private BitmapFont font, shadow;
@@ -105,6 +105,7 @@ public class GameRenderer {
         pause = AssetLoader.pause;
         bgGameMenu = AssetLoader.bgGameMenu;
         buttonGameMenu = AssetLoader.buttonGameMenu;
+        buttonGameMenu2 = AssetLoader.buttonGameMenu2;
         buttonHome = AssetLoader.buttonHome;
         buttonRest = AssetLoader.buttonRest;
      }
@@ -128,6 +129,7 @@ public class GameRenderer {
         if (!world.isAlive()){
             batcher.draw(squirrelBum, squirrel.getX() - squirrel.getWidth()/4, squirrel.getY(),
                     squirrelBum.getRegionWidth(), squirrelBum.getRegionHeight());
+            world.setIsAliveCheked(false);
 
         } else {
 
@@ -189,8 +191,14 @@ public class GameRenderer {
             shadow.setScale(.29f, -.29f);
             font.setScale(.29f, -.29f);
 
-            batcher.draw(buttonGameMenu,120 + (300 - buttonGameMenu.getRegionWidth())/2 , 500-buttonGameMenu.getRegionWidth() - 100 ,
-                    buttonGameMenu.getRegionWidth(), buttonGameMenu.getRegionWidth());
+            if (world.isAlive()) {
+                batcher.draw(buttonGameMenu, 120 + (300 - buttonGameMenu.getRegionWidth()) / 2, 500 - buttonGameMenu.getRegionWidth() - 100,
+                        buttonGameMenu.getRegionWidth(), buttonGameMenu.getRegionWidth());
+            }
+            else{
+                batcher.draw(buttonGameMenu2, 120 + (300 - buttonGameMenu.getRegionWidth()) / 2, 500 - buttonGameMenu.getRegionWidth() - 100,
+                        buttonGameMenu.getRegionWidth(), buttonGameMenu.getRegionWidth());
+            }
 
             batcher.draw(buttonHome,120 + (300 - buttonGameMenu.getRegionWidth())/2  -138/2 , 500-buttonGameMenu.getRegionWidth() - 50 ,
                     buttonHome.getRegionWidth()-50, buttonHome.getRegionWidth()-50);

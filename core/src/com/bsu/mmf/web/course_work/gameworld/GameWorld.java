@@ -3,6 +3,7 @@ package com.bsu.mmf.web.course_work.gameworld;
 
 import com.bsu.mmf.web.course_work.Constants;
 import com.bsu.mmf.web.course_work.gameobjects.Acorn;
+import com.bsu.mmf.web.course_work.gameobjects.Caretaker;
 import com.bsu.mmf.web.course_work.gameobjects.ScrollHandler;
 import com.bsu.mmf.web.course_work.gameobjects.Squirrel;
 import com.bsu.mmf.web.course_work.handlers.GameAccelerometerHandler;
@@ -19,7 +20,9 @@ public class GameWorld {
     private Acorn acorns;
     private ScrollHandler scroller;
     private GameAccelerometerHandler accelerometer ;
+    private Caretaker caretaker;
     private boolean isAlive = true;
+    private boolean isAliveCheked = true;
     public boolean inPause = false;
 
     private int score = 0;
@@ -34,6 +37,7 @@ public class GameWorld {
         acorns = new Acorn(0, 0);
 
         accelerometer = new GameAccelerometerHandler(this);
+        caretaker = new Caretaker(this);
     }
 
     public void update(float delta) {
@@ -62,8 +66,11 @@ public class GameWorld {
             squirrel.die();
             isAlive = false;
 
-            scoreSum = score + score2*10 ;
+            if (Constants.SOUND){
+                AssetLoader.crashSound.play();
+            }
 
+            scoreSum = score + score2*10 ;
 
             AssetLoader.listScore.add(scoreSum);
             Collections.sort(AssetLoader.listScore);
@@ -75,11 +82,21 @@ public class GameWorld {
             AssetLoader.prefs.flush();
 
 
-            inPause = true; // TODO: добавить sleep
+            //inPause = true; // TODO: добавить sleep
         }
+
+        try {
+            caretaker.update();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
 
         if (acorns.collides(squirrel)) {
             addScore2(1);
+            if (Constants.SOUND){
+                AssetLoader.acornSound.play();
+            }
         }
     }
 
@@ -97,6 +114,14 @@ public class GameWorld {
 
     public boolean isAlive() {
         return isAlive;
+    }
+
+    public boolean isAliveCheked() {
+        return isAliveCheked;
+    }
+
+    public void setIsAliveCheked(boolean isAliveCheked) {
+         this.isAliveCheked = isAliveCheked;
     }
 
     public boolean isPause() {
@@ -136,5 +161,6 @@ public class GameWorld {
         score2 = 0;
         scoreSum = 0;
         inPause = false;
+        isAliveCheked = true;
     }
 }
