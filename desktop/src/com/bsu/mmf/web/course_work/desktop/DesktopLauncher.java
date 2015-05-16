@@ -9,7 +9,7 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
         config.title = "Ice Age: Squirrel";
 		config.width = 400;
-        config.height = 900;
+        config.height = 710;
 		new LwjglApplication(new OurGame(), config);
 	}
 }

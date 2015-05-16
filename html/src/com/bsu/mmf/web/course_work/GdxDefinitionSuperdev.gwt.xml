@@ -4,7 +4,7 @@
 	<inherits name='com.badlogic.gdx.backends.gdx_backends_gwt' />
 
     <inherits name='com.bsu.mmf.web.course_work.GdxDefinition' />
-    
+
     <collapse-all-properties />
     
 	<add-linker name="xsiframe"/>	
