@@ -12,11 +12,8 @@ public class OurGame extends Game {
     public MenuScreen menu;
 	
 	@Override
-	public void create () {
+	public void create() {
         AssetLoader.load();  // подгружаем ресурсы
-
-        float gameWidth = Constants.GAME_WIDTH;     // просчёт относительных сторон
-        float gameHeight = Gdx.graphics.getHeight() / (Gdx.graphics.getWidth() / gameWidth);
 
         game = new GameScreen(this);
         menu = new MenuScreen(this);
