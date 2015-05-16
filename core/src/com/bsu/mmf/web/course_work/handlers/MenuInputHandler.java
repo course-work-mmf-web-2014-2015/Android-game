@@ -73,21 +73,17 @@ public class MenuInputHandler implements InputProcessor {
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        if (!Gdx.app.getType().equals(Application.ApplicationType.Android)) {
-            return false;
-        }
-
         if(world.isDownBtn()){
             world.setDownBtn(false);
             Constants.SOUND = world.isEnabledSound();
             Constants.ACCELEROMETER = world.isEnabledAccelerom();
-            //dispose();
+            game.menu.dispose();
             game.setScreen(game.game);
         }
 
         if(world.isDownExit()){
             Gdx.app.exit();
-            //dispose();
+            game.menu.dispose();
         }
 
         return true;
